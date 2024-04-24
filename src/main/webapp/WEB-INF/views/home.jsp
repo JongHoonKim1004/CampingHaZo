@@ -6,12 +6,9 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	hihih 
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
 </body>
-<script>
-
-</script>
 </html>
