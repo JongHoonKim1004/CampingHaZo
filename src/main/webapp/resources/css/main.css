@@ -1,0 +1,114 @@
+@charset "UTF-8";
+.main {
+	width: 1920px;
+	height: 1100px;
+	background: url("/resources/img/main/bg1.jpg") center center / cover no-repeat;
+	position: relative;
+}
+
+.main-wrap::after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.45) url(/resources/img/main/dot2.png);
+	
+}
+
+.upper-main {
+	z-index: 3;
+	color: white;
+}
+
+.searchForm {
+	position: relative;
+}
+.search {
+	margin: 300px 0 50px;
+}
+#search {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 25px;
+	padding-left: 15px;
+	border-radius: 10px;
+	
+}
+
+#searchBtn {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50px;
+	height: 50px;
+	border-radius: 0 10px 10px 0;
+	border-left: 0;
+}
+
+/* Bootstrap carousel*/
+.items{
+  margin:0px auto;
+  margin-top: 10px;
+}
+
+.items p {
+	
+	text-align: center;
+}
+
+
+.slick-slide{
+  width: 30%;
+  margin:10px;
+}
+.slick-slide img{
+  width:100%;
+  border: 0px solid #fff;
+  margin-bottom: 10px;
+}
+.main-notice a {
+	color: black;
+}
+
+.main-notice a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+.main-notice span {
+	font-size: 20px;
+	font-weight: bolder;
+	line-height: 32px;
+}
+
+.main-notice-list a {
+	color: black;
+}
+
+.main-notice-list a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+.totalCount {
+	background-color: RGB(37, 165, 240);
+	color: white;
+	display: flex;
+	justify-content: center;
+	line-height: 38px;
+}
+
+.page_ui {
+	line-height: 38px;
+	border: 1px solid black;
+	text-align: center;
+}
+
+.searchSelect {
+	margin-right: 3px;
+	float: left;
+}

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+.boardList {
+}
+
+.btnList {
+	font-size: 14px !important;
+}
+
+.toggle {
+	width: 40px;
+}
+
+.noticeSelect {
+	border: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+.noticeSpan {
+	margin-right: 25px;
+	color: #999;
+}
+
+.noticeContentSpan {
+	margin-right: 12px;
+	margin-left: 12px;
+	color: #999;
+}
+
+.voc {
+	background-color: white;
+}

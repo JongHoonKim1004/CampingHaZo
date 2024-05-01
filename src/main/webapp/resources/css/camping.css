@@ -1,0 +1,30 @@
+@charset "UTF-8";
+.campingList {
+	overflow-y: scroll;
+	max-height: 679px;
+}
+
+.campingSpan {
+	font-size: 12px;
+	margin-left: 20px;
+}
+
+.reservationBtn{
+	display: inline-block;
+	height: 38px;
+	width: 38px;
+	text-align: center;
+	line-height: 38px;
+	border: 1px solid #c0c0c0;
+	font-wieght: 700;
+	font-size: 16px;
+	letter-spacing: -1.1px;
+	position: absolute;
+	top: 40%;
+	border-color: #00c73c;
+	color: #00c73c;
+}
+
+.campingListSpan {
+	margin-right: 10px;
+}
