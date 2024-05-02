@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.camping.mapper.NoticeMapper">
+    <select id="getList" resultType="com.camping.domain.NoticeVO">
+           select * from notice order by nno desc
+    </select> 
+    
+     <insert id="insert">
+		insert into notice (nno, title, content, writer)
+		values (seq_notice.nextval, #{title}, #{content}, #{writer})
+	</insert>
+	
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="nno" order="BEFORE"
+			resultType="int">
+			select seq_notice.nextval from dual
+		</selectKey>
+		
+		insert into notice (nno, title, content, writer)
+		values (#{nno}, #{title}, #{content}, #{writer})
+	</insert>
+
+   <select id="read" resultType="com.camping.domain.NoticeVO">
+		select * from notice where
+		nno=#{nno}
+	</select>
+	
+	<delete id="delete">
+		delete from notice where nno = #{nno}
+	</delete>
+	
+   
+    <update id="update">
+		update notice
+		set title= #{title},
+		content= #{content},
+		writer = #{writer},
+		updateDate = sysdate
+		where nno=#{nno}
+	</update>
+
+      
+
+
+</mapper>
+
+
+
+
+

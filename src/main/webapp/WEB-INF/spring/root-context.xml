@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+           	<!-- Root Context: 다른 모든 웹 컴포넌트에서 사용 가능한 공유 리소스 정의 -->
+	
+	<!-- HikariCP 구성 -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	    <!-- 데이터베이스 드라이버 클래스와 접속 URL 설정 -->
+	    <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+	    <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE" />
+
+	    <!-- 데이터베이스 접속 계정 정보 설정 -->
+	    <property name="username" value="camping" />
+	    <property name="password" value="1234" />
+	</bean>
+
+	<!-- HikariCP를 사용한 데이터베이스 커넥션 풀을 생성하는 빈 -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	<mybatis-spring:scan	base-package="com.camping.mapper" />
+	
+	<context:component-scan base-package="com.camping.service" />
+	
+	
+</beans>
