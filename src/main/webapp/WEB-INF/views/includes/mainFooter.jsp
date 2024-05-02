@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="container footer pt-5">
+<div class="footer pt-5">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="row">
+			<div class="row justify-content-md-center">
 				<div class="col-md-2">
 					<img alt="footer-logo" src="/resources/img/mainFooter/logo_square_100.jpg">
 				</div>
-				<div class="col-md-10">
+				<div class="col-md-5">
 					<div class="row">
 						<ul class="footer-ul">
 							<li><a href="#">개인정보취급방침</a></li>

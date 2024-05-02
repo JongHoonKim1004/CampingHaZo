@@ -112,3 +112,7 @@
 	margin-right: 3px;
 	float: left;
 }
+
+.mainNoticeList {
+	text-decoration: none;
+}

@@ -10,6 +10,10 @@
 	width: 40px;
 }
 
+.noticeList {
+	overflow-y : scroll;
+}
+
 .noticeSelect {
 	border: 0;
 	width: 100%;
@@ -30,4 +34,14 @@
 
 .voc {
 	background-color: white;
+}
+
+.newReview {
+	text-decoration: none;
+	color: black;
+}
+
+.newReview:hover {
+	text-decoration: underline;
+	color: black;
 }

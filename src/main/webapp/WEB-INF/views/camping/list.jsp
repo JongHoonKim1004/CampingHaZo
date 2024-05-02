@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp"%>
 
-<div class="container" >
+<div>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="row pb-1" style="border-bottom: 1px solid #999;">
 				<div class="col-md-4">
 					<i class="fa fa-tasks"></i> <span>2,529</span>개
@@ -36,14 +36,81 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<div class="row">
-				<div id="map" style="width:100%; min-height:772px;"></div>
+				<div id="map" style="width:100%; min-height:749px;"></div>
 			</div>
 		</div>
 	</div>
 </div>
 
+<div class="rightview">
+	<div class="container">
+		<div class="row rightview-title-div pt-2 pb-2">
+			<span class="rightview-title">title</span>
+		</div>
+		<div class="row rightview-content-div">
+			<div class="col-md-12">
+				<div class="row rightview-addr-div mb-4 pt-3">
+					<div class="col-md-12"><i class="fa fa-map-marker" style="margin-right: 10px;"></i><span class="rightview-addr"></span></div>
+				</div>
+			</div>
+		</div>
+		<div class="row rightview-res-div pt-2 pb-2 justify-content-md-center">
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-4">
+						<a href="javascript:void();" class="markImg">
+							<img alt="" src="/resources/img/camping/roadview.svg" style="width: 50px;">
+							<br>
+							로드뷰
+						</a>
+					</div>
+					<div class="col-md-4">
+						<a href="javascript:void();" class="markImg">
+							<img alt="" src="/resources/img/camping/navigation.svg" style="width: 50px;">
+							<br>
+							길찾기
+						</a>
+					</div>
+					
+					<div class="col-md-4">
+						<a href="javascript:void();" class="markImg">
+							<img alt="" src="/resources/img/camping/share2.svg" style="width: 50px;">
+							<br>
+							공유하기
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row pt-2 pb-2 rightview-discription-div">
+			<div class="col-md-12">
+				<div class="row pt-3">
+					<div class="col-md-6 rightview-discription-q">주변환경</div>
+					<div class="col-md-6 enviroment rightview-discription-a"></div>
+				</div>
+				<div class="row pt-3">
+					<div class="col-md-6 rightview-discription-q">바닥 종류</div>
+					<div class="col-md-6 enviroment rightview-discription-a">데크, 파쇄석, 잔디, 잔디블럭, 보도블럭</div>
+				</div>
+				<div class="row pt-3">
+					<div class="col-md-6 rightview-discription-q">부대시설</div>
+					<div class="col-md-6 facility rightview-discription-a"></div>
+				</div>
+				<div class="row pt-3">
+					<div class="col-md-6 rightview-discription-q">애완동물 동반 가능</div>
+					<div class="col-md-6 pet rightview-discription-a"></div>
+				</div>
+				<div class="row pt-3">
+					<div class="col-md-12 discription">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <%@ include file="../includes/searchFooter.jsp"%>
 
@@ -56,6 +123,7 @@
 const basedURL = "http://apis.data.go.kr/B551011/GoCamping";
 const key = "zQw6PXo%2BVD46UR4OpCnBT9jFkLL7ubkMP%2BFjVV%2FhHxAPkCCzZlpeUqkfBdHoYo589oaV4IgJkJytB7R%2FYbilXg%3D%3D";
 const pageNo = 1;
+var campingData = null;
 
 $.ajax({
 	url: basedURL + "/basedList?serviceKey=" + key + "&_type=json&MobileApp=AppTest&MobileOS=ETC&numOfRows=20&pageNo=" + pageNo,
@@ -64,10 +132,10 @@ $.ajax({
 		console.log(response);
 		
 		var items = response.response.body.items.item;
+		campingData = response.response.body.items.item;
 		var output = "";
 		
-		
-		items.forEach(function(item){
+		items.forEach(function(item, index){
 			// 리스트 출력
 			output += '<div class="row pt-2 pb-2 camping" id="' + item.contentId + '" style="border-bottom: 1px solid #111;">';
 			output += '<input type="hidden" class="lat" value="'+ item.mapY +'">';
@@ -75,7 +143,7 @@ $.ajax({
 			output += '<div class="col-md-4 p-2"><img alt="" src="' + item.firstImageUrl + '" style="width: 100%;"></div>';
 			output += '<div class="col-md-6">';
 			output += '<div class="row mb-2">';
-			output += '<span class="campingListSpan">유료캠핑장</span> ' + item.facltNm + '</div>';
+			output += '<div class="col-md-12"><span class="campingListSpan">유료캠핑장</span><a class="campingTitle" href="' + index + '"> ' + item.facltNm + '</a></div></div>';
 			output += '<div class="row mb-2">';
 			output += item.doNm + ' > ' + item.sigunguNm + '</div>';
 			output += '<div class="row mb-2">';
@@ -104,8 +172,49 @@ $.ajax({
 	}
 });
 
-
-
+// 캠핑장 이름 클릭시 화면 호출 및 지도 이동
+var titleClicked = false;
+$(".rightview").css("right", "-850px");
+$("body").on("click", ".campingTitle", function(e){
+	e.preventDefault();
+	if(titleClicked){
+		// 우측 화면 제거
+		$(".rightview").animate({right: "-850px"});
+		titleClicked = false;
+	} else {
+		// 우측 화면 호출
+		$(".rightview").animate({right: "0px"});
+		titleClicked = true;
+		
+		var number = $(this).attr("href");
+		var item = campingData[number];
+		console.log(item);
+		
+		// 설정 화면에 대입
+		$(".rightview-title").html(item.facltNm);
+		$(".rightview-addr").html(item.addr1 + "<br>" + item.direction);
+		
+		if(item.themaEnvrnCl != ""){
+			$(".enviroment").html(item.lctCl);
+		}
+		
+		if(item.sbrsEtc != "" && item.posblFcltyCl != ""){
+			$(".facility").html(item.sbrsEtc + ", " + item.posblFcltyCl);
+		} else if(item.sbrsEtc != "" && item.posblFcltyCl == ""){
+			$(".facility").html(item.sbrsEtc);
+		} else if(item.sbrsEtc == "" && item.posblFcltyCl != ""){
+			$(".facility").html(item.posblFcltyCl);
+		}
+		
+		if(item.animalCmgCl == "가능"){
+			$(".pet").html(item.animalCmgCl);
+		} else{
+			$('.pet').html(item.animalCmgCl);
+		}
+		
+		$(".discription").html(item.intro);
+	}
+});
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
@@ -202,7 +311,7 @@ kakao.maps.event.addListener(map, 'dragend', function() {
     			output += '<div class="col-md-4 p-2"><img alt="" src="' + item.firstImageUrl + '" style="width: 100%;"></div>';
     			output += '<div class="col-md-6">';
     			output += '<div class="row mb-2">';
-    			output += '<span class="campingListSpan">유료캠핑장</span> ' + item.facltNm + '</div>';
+    			output += '<span class="campingListSpan">유료캠핑장</span> <a href="javascript:void(0);" onclick=showRight(' + item.contentId + ')>' + item.facltNm + '</a></div>';
     			output += '<div class="row mb-2">';
     			output += item.doNm + ' > ' + item.sigunguNm + '</div>';
     			output += '<div class="row mb-2">';
@@ -231,4 +340,9 @@ kakao.maps.event.addListener(map, 'dragend', function() {
     	}
     });
 });
+
+// 오른쪽 화면 소환
+function showRight(contentId){
+	
+}
 </script>

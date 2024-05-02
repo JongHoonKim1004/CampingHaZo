@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp"%>
 
-<div class="container">
+<div>
 	<div class="row">
-		<div class="col-md-6 boardList">
+		<div class="col-md-4 boardList">
 			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-2">
@@ -35,7 +35,7 @@
 								</a>
 							</div>
 							<div class="row justify-content-md-center mb-3">
-								<a href="#" data-toggle="tooltip3" data-placement="right"
+								<a href="/voc" data-toggle="tooltip3" data-placement="right"
 									title="1:1 문의"> <i class="fa fa-envelope-o fa-2x"></i>
 								</a>
 							</div>
@@ -48,7 +48,7 @@
 					style="border-top: 1px solid black; border-left: 1px solid black;">
 					<div class="row"
 						style="border-bottom: 1px solid #999; background-color: #CCC;">
-						<form>
+						<form style="padding: 0;">
 							<div class="row" style="margin-left: 0">
 								<div class="col-md-3"
 									style="border-right: 1px solid #999; background-color: white;">
@@ -86,9 +86,11 @@
 										</p>
 									</div>
 									<div class="row">
-										<span class="noticeSpan">writer</span> <span
-											class="noticeSpan">date</span> <span class="noticeSpan">readcount</span>
-
+										<div class="col-md-12">
+											<span class="noticeSpan">writer</span>
+											<span class="noticeSpan">date</span>
+											<span class="noticeSpan">readcount</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -97,26 +99,27 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 p-4">
+		<div class="col-md-8 p-4">
 			<div class="container">
 				<div class="col-md-12">
 					<div class="row contentTitle pb-3 mb-5" style="border-bottom: 1px solid #999;">
 						<div class="col-md-12">
 							<div class="row mb-2">title</div>
 							<div class="row">
-								<span class="noticeContentSpan" style="margin-left: 0;">writer</span>
-								|
-								<span class="noticeContentSpan">time</span>
-								|
-								<span class="noticeContentSpan">
-									<i class="fa fa-eye"></i>
-									readcount
-								</span>
+								<div class="col-md-12">
+									<span class="noticeContentSpan" style="margin-left: 0;">writer</span>
+									|
+									<span class="noticeContentSpan">time</span>
+									|
+									<span class="noticeContentSpan">
+										<i class="fa fa-eye"></i>
+										readcount
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row contentText mb-3">text</div>
-					<div class="row contentImg">img</div>
+					<div class="noticeContent"> content</div>
 				</div>
 			</div>
 		</div>

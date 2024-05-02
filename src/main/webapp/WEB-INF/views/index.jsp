@@ -5,14 +5,14 @@
 
 <%@ include file="./includes/header.jsp"%>
 
-<div class="container">
+<div>
 	<div class="row">
 		<div class="main">
 			<div class="main-wrap"></div>
 			<div class="upper-main">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="row justify-content-md-center search">
+						<div class="row justify-content-md-center search pt-5 pb-5">
 							<div class="col-md-8">
 								<h4 style="text-align: center;">오늘은 어디로 가볼까?</h4>
 								<div class="searchForm">
@@ -54,11 +54,11 @@
 		</div>
 	</div>
 </div>
-<div class="container" style="background-color: #eceef6">
+<div style="background-color: #eceef6">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="middle-main pt-3 pb-3">
-				<div class="row">
+				<div class="row justify-content-md-center">
 					<div class="col-md-4">
 						<div class="row">
 							<div class="col-lg-12 main-notice">
@@ -72,16 +72,16 @@
 						<div class="row justify-content-md-center pt-2 main-notice-list">
 							<div class="col-md-10">
 								<p>
-									<a href="#">공지사항 테스트</a>
+									<a href="#" class="mainNoticeList">공지사항 테스트</a>
 								</p>
 								<p>
-									<a href="#">공지사항 테스트</a>
+									<a href="#" class="mainNoticeList">공지사항 테스트</a>
 								</p>
 
 							</div>
 						</div>
 					</div>
-					<div class="col-md-8">
+					<div class="col-md-6">
 						<div class="row justify-content-md-center align-items-md-center">
 							<img alt="" src="/resources/img/main/camver%20banner.jpg">
 						</div>
@@ -105,7 +105,7 @@
 
 
 <script type="text/javascript"
-	src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+	src="/resources/script/echarts.min.js"></script>
 <script type="text/javascript">
 // 차트 생성 함수
 
@@ -326,7 +326,7 @@ window.onload = function(){
 <!--Slick Carousel Slider-->
 
 <script type="text/javascript"
-	src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	src="/resources/script/slick.js"></script>
 <script>
 $(document).ready(function(){
     

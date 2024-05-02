@@ -14,21 +14,33 @@
 					</div>
 				</div>
 				<form>
-					<div class="row">
+					<div class="row mb-3">
 						<div class='col-md-12'>
 							<div class="row form-group">
-								<label for="title" class="col-md-1">제 목</label> <input
-									type="text" class="col-md-11 form-control input-group-sm"
-									name="title" id="title">
+								<div class="col-md-1">
+									<label for="title" class="form-label">제 목</label> 
+								</div>
+								<div class="col-md-11">
+									<input type="text" class="form-control" name="title" id="title">
+								</div>
+								
+								
 							</div>
 						</div>
+					</div>
+					<div class="row mb-3">
 						<div class='col-md-12'>
 							<div class="row form-group">
-								<label for="writer" class="col-md-1">성 함</label> <input
-									type="text" class="col-md-5 form-control" name="writer"
-									id="writer">
+								<div class="col-md-1">
+									<label for="writer" class="form-label">성 함</label> 
+								</div>
+								<div class="col-md-5">
+									<input type="text" class="form-control" name="writer" id="writer">
+								</div>
 							</div>
 						</div>
+					</div>
+					<div class="row">	
 						<div class='col-md-12'>
 							<div class="row form-group">
 								<label for="email" class="col-md-1">이메일</label> <input
@@ -56,7 +68,9 @@
 					</div>
 					<div class="row justify-content-md-center mt-3">
 						<div class="col-md-3">
-							<button class="btn btn-primary btn-block" id="submit" type="submit" onclick="return clickSubmit()">등록하기</button>
+							<div class="row">
+								<button class="btn btn-primary btn-block" id="submit" type="submit" onclick="return clickSubmit()">등록하기</button>
+							</div>
 						</div>
 					</div>
 				</form>

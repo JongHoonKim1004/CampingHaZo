@@ -25,5 +25,9 @@ public class TempController {
 		
 		return "/camping/list";
 	}
-	
+
+	@GetMapping("/review/register")
+	public void registerrevice() {
+		
+	}
 }

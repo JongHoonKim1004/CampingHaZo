@@ -14,24 +14,17 @@
 <!-- Naver Smart Editor -->
 <link href="/resources/css/smart_editor2.css" rel="stylesheet" type="text/css">
 <!-- W3 Bootstrap -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/resources/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.0.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="/resources/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 <!-- Font Awesome -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- Slick Carousel -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/slick-theme.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/slick.css" />
 
 <!-- Daum Address API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -40,15 +33,15 @@
 	
 </head>
 <body>
-	<div class="container header">
+	<div class="header">
 		<div class="row upper-navbar mb-2">
 			<div class="col-md-12">
 				<div id="upper-navbar">
 					<ul>
 						<li><a href="/">HOME</a></li>
 						<li><a href="/notice/list">공지사항</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#myModal">회원가입</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#myModal2">로그인</a></li>
+						<li><a href="#" data-bs-toggle="modal" data-bs-target="#myModal">회원가입</a></li>
+						<li><a href="#" data-bs-toggle="modal" data-bs-target="#myModal2">로그인</a></li>
 						<li><a href="/voc">고객센터</a></li>
 					</ul>
 				</div>
@@ -84,9 +77,9 @@
 				<div class="modal-content">
 					<form action="/member/join" method="post">
 						<!-- Modal Header -->
-						<div class="modal-header">
+						<div class="modal-header" style="">
 							<h4 class="modal-title">회원가입</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							
 						</div>
 
 						<!-- Modal body -->
@@ -175,7 +168,9 @@
 
 						<!-- Modal footer -->
 						<div class="modal-footer">
+							
 							<button type="button" class="btn btn-primary">회원가입</button>
+							<button type="button" class="close btn btn-secondary" style="float: right;" data-bs-dismiss="modal">&times;</button>
 						</div>
 					</form>
 				</div>
@@ -192,14 +187,14 @@
 						<!-- Modal Header -->
 						<div class="modal-header">
 							<h4 class="modal-title">로그인</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							
 						</div>
 
 						<!-- Modal body -->
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-md-12">
-									<div class="row form-group">
+									<div class="row form-group mb-3">
 										<div class="col-md-3">
 											<label for="username">아이디</label>
 										</div>
@@ -207,7 +202,7 @@
 											<input type="text" class="form-control" name="username" id="username">
 										</div>
 									</div>
-									<div class="row form-group">
+									<div class="row form-group mb-3">
 										<div class="col-md-3">
 											<label for="password">비밀번호</label>
 										</div>
@@ -222,6 +217,7 @@
 						<!-- Modal footer -->
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-primary">로그인</button>
+							<button type="button" class="close btn btn-secondary" style="float: right;" data-bs-dismiss="modal">&times;</button>
 						</div>
 					</form>
 				</div>
