@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.camping.mapper.VocMapper">
+    <select id="getList" resultType="com.camping.domain.VocVO">
+        select * from voc
+    </select>
+    
+     <insert id="insert">
+        insert into voc (vno, title, content, writer)
+        values(seq_voc.nextval, #{title}, #{content}, #{writer})
+     </insert>
+     
+     <insert id="insertSelectKey">
+        <selectKey keyProperty="vno" order="BEFORE" resultType="long">
+          select seq_voc.nextval from dual
+        </selectKey>
+        
+        insert into voc (vno, title, content, writer)
+        values(#{vno}, #{title}, #{content}, #{writer})
+     </insert>
+     
+     <select id="read" resultType="com.camping.domain.VocVO">
+        select * from voc where vno = #{vno}
+     </select>
+    
+     <delete id="delete">
+         delete from voc where vno = #{vno}
+     </delete>
+     
+      <update id="update">
+         update voc
+         set title = #{title},
+         content = #{content},
+         writer = #{writer},
+         updateDate = sysdate
+         where vno = #{vno}
+      </update>
+     
+</mapper>

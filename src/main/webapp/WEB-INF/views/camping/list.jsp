@@ -28,7 +28,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row campingListRow">
 				<div class="col-md-12 campingList">
 					<!-- mapping -->
 					
@@ -38,7 +38,9 @@
 		</div>
 		<div class="col-md-8">
 			<div class="row">
-				<div id="map" style="width:100%; min-height:749px;"></div>
+				<div class="col-md-12">
+					<div id="map" style="width:100%; height: 800px"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -48,6 +50,11 @@
 	<div class="container">
 		<div class="row rightview-title-div pt-2 pb-2">
 			<span class="rightview-title">title</span>
+		</div>
+		<div class="row pb-4">
+			<div class="col-md-12 rightview-img">
+				
+			</div>
 		</div>
 		<div class="row rightview-content-div">
 			<div class="col-md-12">
@@ -117,6 +124,15 @@
 <!-- Kakao Map -->	
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a19cace20af62221f6c0b0a6273314b0"></script>
 <script>
+//카카오 맵 초기 호출
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    mapOption = { 
+        center: new kakao.maps.LatLng(37.335887, 126.584063), // 지도의 중심좌표
+        level: 10 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 
 
 //공공데이터포탈 API 사용해서 캠핑장 목록 호출
 
@@ -152,7 +168,7 @@ $.ajax({
 			output += item.tel + '</div>';
 			output += '</div>';
 			output += '<div class="col-md-2" style="position: relative;">';
-			output += '<a href="' + item.contentId+ '" class="reservationBtn"><span>예약</span></a>';
+			output += '<a href="/reservation?name=' + item.facltNm+ '" class="reservationBtn"><span>예약</span></a>';
 			output += '</div></div>';
 			
 			$('.campingList').append(output);
@@ -166,6 +182,7 @@ $.ajax({
 		});
 		
 		marking();
+		$(".campingListRow").css("overflow-y", "scroll");
 	},
 	error: function(error){
 		console.error(error);
@@ -177,6 +194,8 @@ var titleClicked = false;
 $(".rightview").css("right", "-850px");
 $("body").on("click", ".campingTitle", function(e){
 	e.preventDefault();
+	
+	
 	if(titleClicked){
 		// 우측 화면 제거
 		$(".rightview").animate({right: "-850px"});
@@ -190,19 +209,33 @@ $("body").on("click", ".campingTitle", function(e){
 		var item = campingData[number];
 		console.log(item);
 		
+		// 지도를 캠핑장 위치를 중심으로 하도록 이동
+		panTo(item.mapY, item.mapX);
+		
 		// 설정 화면에 대입
 		$(".rightview-title").html(item.facltNm);
+		$(".rightview-img").html("<img alt='' src='" + item.firstImageUrl + "'>")
+		
 		$(".rightview-addr").html(item.addr1 + "<br>" + item.direction);
 		
 		if(item.themaEnvrnCl != ""){
 			$(".enviroment").html(item.lctCl);
 		}
 		
-		if(item.sbrsEtc != "" && item.posblFcltyCl != ""){
+		
+		if(item.sbrsEtc != "" && item.sbrsCl != "" && item.posblFcltyCl != ""){
+			$(".facility").html(item.sbrsEtc + ", " + item.sbrs.Cl + ", " + item.posblFcltyCl);
+		} else if(item.sbrsEtc != "" && item.sbrsCl != "" && item.posblFcltyCl == ""){
+			$(".facility").html(item.sbrsEtc + ", " + item.sbrsCl);
+		} else if(item.sbrsEtc != "" && item.sbrsCl == "" && item.posblFcltyCl != ""){
 			$(".facility").html(item.sbrsEtc + ", " + item.posblFcltyCl);
-		} else if(item.sbrsEtc != "" && item.posblFcltyCl == ""){
+		} else if(item.sbrsEtc == "" && item.sbrsCl != "" && item.posblFcltyCl != ""){
+			$(".facility").html(item.sbrsCl + ", " + item.posblFcltyCl);
+		} else if(item.sbrsEtc != "" && item.sbrsCl == "" && item.posblFcltyCl == ""){
 			$(".facility").html(item.sbrsEtc);
-		} else if(item.sbrsEtc == "" && item.posblFcltyCl != ""){
+		} else if(item.sbrsEtc == "" && item.sbrsCl != "" && item.posblFcltyCl == ""){
+			$(".facility").html(item.sbrsCl);
+		} else if(item.sbrsEtc == "" && item.sbrsCl == "" && item.posblFcltyCl != ""){
 			$(".facility").html(item.posblFcltyCl);
 		}
 		
@@ -216,35 +249,28 @@ $("body").on("click", ".campingTitle", function(e){
 	}
 });
 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-    mapOption = { 
-        center: new kakao.maps.LatLng(37.335887, 126.584063), // 지도의 중심좌표
-        level: 10 // 지도의 확대 레벨
-    };
 
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
- 
+// 지도 마커 클릭시 해당 정보 호출
+
+
+// 지도 부드럽게 이동 함수
+function panTo(lat, lng){
+	var moveLatLon = new kakao.maps.LatLng(lat, lng);
+	
+	map.panTo(moveLatLon);
+}
+
+
 // 마커를 표시할 위치와 title 객체 배열입니다 
 var positions = [{
-    title: '카카오', 
-    latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-},
-{
-    title: '생태연못', 
-    latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-},
-{
-    title: '텃밭', 
-    latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-},
-{
-    title: '근린공원',
-    latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+	title: "",
+	latlng: ""
 }];
 
 // 마커 이미지의 이미지 주소입니다
-var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-    
+var imageSrc = "/resources/img/camping/tent2.png"; 
+
+// 목록 호출이 완료되면 지도에 마커를 추가합니다
 function marking(){
 	for (var i = 0; i < 20; i ++) {
 	    for(var j = 0 ; j < 20; j++){
@@ -257,10 +283,10 @@ function marking(){
 		    pos = null;
 	    }
 	    
-	    
+	 
 		
 	    // 마커 이미지의 이미지 크기 입니다
-	    var imageSize = new kakao.maps.Size(24, 35); 
+	    var imageSize = new kakao.maps.Size(35, 35); 
 	    
 	    // 마커 이미지를 생성합니다    
 	    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
@@ -276,6 +302,7 @@ function marking(){
 
 }
 
+// 지도를 드래그 하고 놓을 때 중심 좌표 근처 20km 캠핑장 목록을 출력합니다
 kakao.maps.event.addListener(map, 'dragend', function() {
     // 지도의 중심좌표를 얻어옵니다 
     var latlng = map.getCenter(); 
@@ -283,6 +310,7 @@ kakao.maps.event.addListener(map, 'dragend', function() {
     
     positions = [];
     
+    // 지도를 새롭게 호출하여 이전의 모든 마커를 제거합니다
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
         center: new kakao.maps.LatLng(latlng.getLat(), latlng.getLng()), // 지도의 중심좌표
@@ -300,10 +328,11 @@ kakao.maps.event.addListener(map, 'dragend', function() {
     		console.log(response);
     		
     		var items = response.response.body.items.item;
+    		campingData = response.response.body.items.item;
     		var output = "";
     		
     		
-    		items.forEach(function(item){
+    		items.forEach(function(item, index){
     			// 리스트 출력
     			output += '<div class="row pt-2 pb-2 camping" id="' + item.contentId + '" style="border-bottom: 1px solid #111;">';
     			output += '<input type="hidden" class="lat" value="'+ item.mapY +'">';
@@ -311,7 +340,7 @@ kakao.maps.event.addListener(map, 'dragend', function() {
     			output += '<div class="col-md-4 p-2"><img alt="" src="' + item.firstImageUrl + '" style="width: 100%;"></div>';
     			output += '<div class="col-md-6">';
     			output += '<div class="row mb-2">';
-    			output += '<span class="campingListSpan">유료캠핑장</span> <a href="javascript:void(0);" onclick=showRight(' + item.contentId + ')>' + item.facltNm + '</a></div>';
+    			output += '<div class="col-md-12"><span class="campingListSpan">유료캠핑장</span><a class="campingTitle" href="' + index + '"> ' + item.facltNm + '</a></div></div>';
     			output += '<div class="row mb-2">';
     			output += item.doNm + ' > ' + item.sigunguNm + '</div>';
     			output += '<div class="row mb-2">';
@@ -320,7 +349,7 @@ kakao.maps.event.addListener(map, 'dragend', function() {
     			output += item.tel + '</div>';
     			output += '</div>';
     			output += '<div class="col-md-2" style="position: relative;">';
-    			output += '<a href="' + item.contentId+ '" class="reservationBtn"><span>예약</span></a>';
+    			output += '<a href="/reservation?name=' + item.facltNm+ '" class="reservationBtn"><span>예약</span></a>';
     			output += '</div></div>';
     			
     			$('.campingList').append(output);
@@ -341,8 +370,6 @@ kakao.maps.event.addListener(map, 'dragend', function() {
     });
 });
 
-// 오른쪽 화면 소환
-function showRight(contentId){
-	
-}
+// 예약버튼 클릭시 해당 예약 사이트로 이동
+
 </script>

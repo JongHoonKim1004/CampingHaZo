@@ -1,7 +1,6 @@
 @charset "UTF-8";
-.campingList {
-	overflow-y: scroll;
-	max-height: 656px;
+.campingListRow {
+	max-height: 770px;
 }
 
 .campingSpan {
@@ -65,10 +64,14 @@
 
 .rightview-discription-q {
 	background-color: #555;
+	text-align: center;
+	color: white;
 }
 
 .rightview-discription-a {
 	background-color: #b0b0b0;
+	text-align: center;
+	color: white;
 }
 
 .rightview-title-div {
@@ -91,4 +94,9 @@
 	color: black; 
 	text-decoration: none;
 	
+}
+
+.reservationImg img {
+	width: 100%;
+
 }
