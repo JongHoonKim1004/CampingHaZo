@@ -1,6 +1,5 @@
 package com.camping.mapper;
 
-import javax.servlet.http.HttpSession;
 
 import com.camping.domain.MemberVO;
 

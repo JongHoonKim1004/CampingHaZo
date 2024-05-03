@@ -64,7 +64,6 @@ a:hover {
 
 
 .footer {
-	
 	background-color: #d9dbe9;
 	
 }
@@ -108,7 +107,9 @@ a:hover {
 
 .searchFooter {
 	background-color: #111;
-	
+	position: fixed;
+	bottom: 0;
+	width: 100%;
 }
 
 .footer_logo {

@@ -32,17 +32,17 @@
 									<div class="col-md-4" style="height: 230px;">
 										<div id="chart1" style="width: 100%; height: 100%;"></div>
 										<p
-											style="font-size: 20px; fomt-weight: 650; text-align: center;">전체</p>
+											style="font-size: 20px; font-weight: 650; text-align: center;">전체</p>
 									</div>
 									<div class="col-md-4" style="height: 230px;">
 										<div id="chart2" style="width: 100%; height: 100%;"></div>
 										<p
-											style="font-size: 20px; fomt-weight: 650; text-align: center;">유료캠핑장</p>
+											style="font-size: 20px; font-weight: 650; text-align: center;">유료캠핑장</p>
 									</div>
 									<div class="col-md-4" style="height: 230px;">
 										<div id="chart3" style="width: 100%; height: 100%;"></div>
 										<p
-											style="font-size: 20px; fomt-weight: 650; text-align: center;">글램핑/카라반</p>
+											style="font-size: 20px; font-weight: 650; text-align: center;">글램핑/카라반</p>
 									</div>
 
 								</div>
