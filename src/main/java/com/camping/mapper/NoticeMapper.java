@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.NoticeVO;
 
 public interface NoticeMapper {
@@ -19,4 +20,8 @@ public interface NoticeMapper {
       public int delete(Long nno);
       
       public int update(NoticeVO votice);
+      
+      public List<NoticeVO> getListWithPaging(Criteria cri);
+      
+      public int getTotal(Criteria cri);
 }

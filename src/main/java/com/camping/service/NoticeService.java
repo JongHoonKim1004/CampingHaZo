@@ -2,6 +2,7 @@ package com.camping.service;
 
 import java.util.List;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.NoticeVO;
 
 public interface NoticeService {
@@ -14,7 +15,9 @@ public interface NoticeService {
 	  
 	  public boolean remove(Long nno);
 	  
-	  public List<NoticeVO> getList();
+	  public List<NoticeVO> getList(Criteria cri);
+	  
+	  public  int getTotal(Criteria cri);
 	  
 	  
 }

@@ -1,14 +1,19 @@
 package com.camping.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.NoticeVO;
+import com.camping.domain.PageDTO;
 import com.camping.service.NoticeService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,10 +30,16 @@ public class NoticeController {
 	 private final NoticeService noticeservice;
 		
 		@GetMapping("/list")
-	    public void list(Model model) {
+	    public void list(Criteria cri,Model model) {
 	     log.info("list...............");
-	     noticeservice.getList().forEach(list -> log.info(list));
-	     model.addAttribute("list", noticeservice.getList());
+	     List<NoticeVO> list = noticeservice.getList(cri);
+	     
+	     list.forEach(notice -> log.info(notice));
+			model.addAttribute("list", list);
+			
+		  int total = noticeservice.getTotal(cri);
+		  model.addAttribute("pageMaker", new PageDTO(cri, total));
+		
 	     }
 		
 	// 등록 처리	
@@ -53,31 +64,35 @@ public class NoticeController {
 		
 		
 	 // 조회처리	
-		@GetMapping("/get")
-		public void testget(@RequestParam("nno") Long nno, Model model) {
-			  log.info("/get :" + nno);
-			  NoticeVO vo = noticeservice.get(nno);
-			  log.info(vo);
-			  model.addAttribute("notice", noticeservice.get(nno));
+		@GetMapping({"/get","/modify"})
+		public void get(@RequestParam("nno") Long nno, @ModelAttribute("cri") Criteria cri, Model model) {
+			
+			model.addAttribute("notice", noticeservice.get(nno));
 		}
 		
 	// 수정 처리
 		
 	  @PostMapping("/modify/")
-	  public String modify(NoticeVO notice, RedirectAttributes rttr) {
+	  public String modify(NoticeVO notice,@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		      log.info("modify:" + notice);
 		      if(noticeservice.modify(notice)) {
 		    	      rttr.addFlashAttribute("result","success");
 		      }
+		      
+		      rttr.addAttribute("pageNum", cri.getPageNum());
+		      rttr.addAttribute("amount",  cri.getAmount());
 		      return "redirect:/  / ";
 	  }
 	  
 	  @PostMapping("/remove")
-	  public String remove(@RequestParam("nno")Long nno, RedirectAttributes rttr) {
+	  public String remove(@RequestParam("nno")Long nno,@ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		     log.info("remove...." + nno);
 		     if(noticeservice.remove(nno)) {
 		    	      rttr.addFlashAttribute("result","success");
 		     }
+		     
+		     rttr.addAttribute("pageNum", cri.getPageNum());
+		     rttr.addAttribute("amount", cri.getAmount());
 		     
 		     return "redirect:/ /";
 	  }

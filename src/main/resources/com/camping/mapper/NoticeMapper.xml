@@ -40,7 +40,19 @@
 		updateDate = sysdate
 		where nno=#{nno}
 	</update>
+	
+	<select id="getListWithPaging" resultType="com.camping.domain.NoticeVO"> 
+	<![CDATA[ 
+		select nno, title, content, writer, regdate, updatedate from ( 
+		select /*+INDEX_DESC(notice pk_notice) */ rownum rn, nno, title, content, 
+		writer, regdate, updatedate from notice where rownum <= #{pageNum} * #{amount}
+		) where rn > (#{pageNum}-1) * #{amount}
+	]]> 
+</select>
 
+<select id="getTotalCount" resultType="int">
+	select count(*) from notice where 
+</select>
       
 
 

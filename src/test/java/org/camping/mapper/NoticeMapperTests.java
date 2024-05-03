@@ -1,11 +1,14 @@
 package org.camping.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.NoticeVO;
 import com.camping.mapper.NoticeMapper;
 
@@ -75,5 +78,12 @@ public class NoticeMapperTests {
 				int count = mapper.update(notice);
 				log.info("UPDATE COUNT: " + count);
 			}
+// 		  
+		  @Test
+		  public void testPageing() {
+			   Criteria cri = new Criteria(1,10);
+			   List<NoticeVO> list = mapper.getListWithPaging(cri);
+			   list.forEach(notice -> log.info(notice));
+		  }
 		 
 }
