@@ -73,6 +73,7 @@
   | ![57](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/9277bafc-aaa9-4edf-8ad3-65ec712d934f) | |
 
  </div>
+</details>
 
  ## 💻 핵심 기능
 
