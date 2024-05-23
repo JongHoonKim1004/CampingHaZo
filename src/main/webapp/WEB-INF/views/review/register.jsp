@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <%@ include file="../includes/header.jsp"%>
 
 <div>
@@ -12,10 +14,7 @@
 				</div>
 				<div class="col-md-8">
 					<div style="float: right;">
-						<button class="btn btn-link btnList">등록순</button>
-						<button class="btn btn-link btnList">조회순</button>
-						<button class="btn btn-link btnList">댓글순</button>
-						<button class="btn btn-link btnList">추천순</button>
+						<a href="/review/register" class="newReview">새 리뷰 등록하기</a>
 					</div>
 				</div>
 			</div>
@@ -45,10 +44,10 @@
 
 				</div>
 				<div class="col-md-11"
-					style="border-top: 1px solid black; border-left: 1px solid black;">
+					style="border-top: 1px solid black; border-left: 1px solid black; min-height: 1000px;">
 					<div class="row"
 						style="border-bottom: 1px solid #999; background-color: #CCC;">
-						<form>
+						<form style="padding: 0;">
 							<div class="row" style="margin-left: 0">
 								<div class="col-md-3"
 									style="border-right: 1px solid #999; background-color: white;">
@@ -69,29 +68,40 @@
 									</div>
 								</div>
 								<div class="col-md-5">
-									<div class="container"></div>
+									<div class="container">
+										<div class="col-md-12">
+											
+										</div>
+									</div>
 								</div>
 							</div>
 						</form>
 					</div>
-					<div class="row">
+					<div class="row" style="height: 90%;">
 						<div class="col-md-12 noticeList">
-							<div class="row notice">
-								<div class="col-md-2">pic</div>
-								<div class="col-md-10">
-									<div class="row">
-										<p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
-											<span class="noticeSpan">캠핑장</span>
-											title
-										</p>
-									</div>
-									<div class="row">
-										<span class="noticeSpan">writer</span> <span
-											class="noticeSpan">date</span> <span class="noticeSpan">readcount</span>
-
+							<c:forEach items="${reviewList }" var="review">
+								<div class="row notice justify-content-end" style="border-bottom: 1px solid #d8d8d8;">
+									<div class="col-md-10">
+										<div class="row">
+											<p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+												<span class="noticeSpan">${review.camping }</span>
+												<a href="${review.rno }" class="callReview">
+													${review.title }
+												</a>
+											</p>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span class="noticeSpan">${review.writer }</span>
+												<span class="noticeSpan">
+													<fmt:formatDate value="${review.regDate }" pattern="yyyy-MM-dd"/>
+												</span> 
+												<span class="noticeSpan">${review.readCount }</span>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -105,7 +115,7 @@
 							<div class="row mb-2">새 리뷰 작성</div>
 						</div>
 					</div>
-					<form action="/review/register" method="post">
+					<form action="/review/register" method="post" name="frm" onsubmit="return clickSubmit()">
 						<div class="row mb-3">
 							<div class="col-md-3">
 								<label class="form-label">제목</label>
@@ -119,7 +129,7 @@
 								<label class="form-label">작성자</label>
 							</div>
 							<div class="col-md-9">
-								<input type="text" name="writer" id="writer" class="form-control" readonly value="zima0412@gmail.com">
+								<input type="text" name="writer" id="writer" value="${username }" class="form-control" readOnly>
 							</div>
 						</div>
 						<div class="row mb-3">
@@ -145,7 +155,7 @@
 						
 						<div class="row mb-3">
 							<div class="col-md-12">
-								<button class="btn btn-primary" type="submit" style="float: right;">리뷰 등록하기</button>
+								<button class="btn btn-primary" type="submit" style="float: right;" >리뷰 등록하기</button>
 							</div>
 						</div>
 					</form> 
@@ -173,7 +183,7 @@ const smartEditor = function(){
 	console.log("Naver smartEditor");
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef: oEditors,
-		elPlaceHolder: editorTxt,
+		elPlaceHolder: "editorTxt",
 		sSkinURI: "/resources/SmartEditor2Skin.html",
 		htParams: {
 			bUseToolbar: true,
@@ -188,7 +198,38 @@ $(function(){
 	smartEditor();
 });
 
-const clickSubmit = function(){
+function clickSubmit(){
+	const form = document.forms['frm']; // 폼을 명확히 참조
+	const titleField = document.getElementById("title");
+	const writerField = document.getElementById("writer");
+	const campingField = document.getElementById("camping");
+	 
+	// 제목 검증
+	const titleValue = titleField ? titleField.value.trim() : "";
+	if (titleValue === "") {
+	        alert("제목을 입력해주세요");
+	        titleField.focus();
+	        return false;
+	    }
+
+	    // 작성자 검증
+	    const writerValue = writerField ? writerField.value.trim() : "";
+	    if (writerValue === "") {
+	        alert("잘못된 접근입니다.");
+	        window.location.href = "/";
+	        return false;
+	    }
+
+	    // 캠핑장 이름 검증
+	    const campingValue = campingField ? campingField.value.trim() : "";
+	    if (campingValue === "") {
+	        alert("리뷰할 캠핑장 이름을 입력해주세요");
+	        campingField.focus();
+	        return false;
+	    }
+    
+    console.log("여기까지 확인 됨");
+	
 	oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
 	var editor_data = $("#editorTxt").val();
 	

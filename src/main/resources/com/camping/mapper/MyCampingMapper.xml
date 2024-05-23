@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.camping.mapper.MyCampingMapper">
+    <select id="getList" resultType="com.camping.domain.MyCampingVO">
+        select * from MyCamping  
+    </select> 
+    
+    <insert id="insert">
+       insert into MyCamping (cno, name, addr, phone, member)
+       values (seq_myCamping.nextval, #{name},#{addr}, #{phone}, #{member})
+    </insert>
+    
+    <insert id="insertSelectKey">
+       <selectKey keyProperty="cno" order="BEFORE" resultType="long">
+           select seq_myCamping.nextval from dual
+       </selectKey>
+       
+       insert into myCamping (cno, name, addr, phone, member)
+       values(#{cno},#{name},#{addr},#{phone},#{member})
+    </insert>
+    
+    <select id="read" resultType="com.camping.domain.MyCampingVO">
+        select * from myCamping where cno = #{cno}
+    </select>
+    
+    <delete id="delete">
+        delete from myCamping where cno = #{cno}
+    </delete>
+    
+    <update id="update">
+       update myCamping
+       set name = #{name},
+       addr = #{addr},
+       phone = #{phone},
+       member = #{member}
+       where cno = #{cno}
+    </update>
+    
+    <select id="findBymember" resultType="com.camping.domain.MyCampingVO">
+    	select * from myCamping where member = #{member}
+    </select>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.camping.mapper.AdminMapper">
+    <select id="getList" resultType="com.camping.domain.AdminVO">
+        select * from admin
+    </select> 
+    
+    <insert id="insert">
+		insert into admin (ano, username, password, name, employeeNo)
+		values (seq_admin.nextval, #{username}, #{password}, #{name}, #{employeeNo})
+	</insert>
+    
+    <insert id="insertSelectKey">
+      <selectKey keyProperty="ano" order="BEFORE" resultType="long">
+         select seq_admin.nextval from dual
+      </selectKey>
+      
+      insert into admin (ano, username, password, name, employeeNo)
+      values(#{ano},#{username},#{password},#{name},#{employeeNo})
+    </insert>
+    
+    <select id="read" resultType="com.camping.domain.AdminVO">
+     select * from admin where ano = #{ano}
+    </select>
+    
+    <delete id="delete">
+		delete from admin where ano = #{ano}
+	</delete>
+	
+	<update id="update">
+	 update admin
+	 set username = #{username},
+	 password = #{password},
+	 name = #{name},
+	 employeeNo = #{employeeNo}
+	 where  ano = #{ano}
+	</update>
+    
+    <select id="findByUsername" resultType="com.camping.domain.AdminVO">
+    	select * from admin where username = #{username}
+    </select>
+</mapper>

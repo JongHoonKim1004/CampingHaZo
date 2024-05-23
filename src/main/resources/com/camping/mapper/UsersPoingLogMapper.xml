@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.camping.mapper.UsersPoingLogMapper">
+    <select id="getList" resultType="com.camping.domain.UsersPoingLogVO">
+        select * from usersPoingLog
+    </select> 
+    
+    <insert id="insert">
+      insert into usersPoingLog(lno, username, pointChange, changeReason)
+      values(seq_usersPoingLog.nextval, #{username},#{pointChange},#{changeReason})
+    </insert>
+    
+    <insert id="insertSelectKey">
+		<selectKey keyProperty="lno" order="BEFORE"
+			resultType="long">
+			select seq_usersPointLog.nextval from dual
+		</selectKey>
+		
+		insert into usersPoingLog (lno, username, pointChange, changeReason)
+		values (#{lno}, #{username}, #{pointChange}, #{changeReason})
+	</insert>
+    
+    
+    <select id="read" resultType="com.camping.domain.UsersPoingLogVO">
+       select * from usersPoingLog where lno = #{lno}
+    </select>
+    
+    <delete id="delete">
+       delete from usersPoingLog where lno = #{lno}
+    </delete>
+    
+    <update id="update">
+      update usersPoingLog
+      set username = #{username},
+      pointChange = #{pointChange},
+      changeReason = #{changeReason},
+      changeTime = sysdate
+      where lno = #{lno}
+      
+    </update>
+    
+    <select id="findByUsername" resultType="com.camping.domain.UsersPoingLogVO">
+    	select * from usersPoingLog where username = #{username}
+    </select>
+</mapper>

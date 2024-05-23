@@ -269,40 +269,34 @@ var positions = [{
 
 // 마커 이미지의 이미지 주소입니다
 var imageSrc = "/resources/img/camping/tent2.png"; 
+var markers = [];
 
 // 목록 호출이 완료되면 지도에 마커를 추가합니다
 function marking(){
-	for (var i = 0; i < 20; i ++) {
-	    for(var j = 0 ; j < 20; j++){
-	    	var pos = {
-		    		title: $(".campingList").find(".camping").eq(i).attr("id"),
-		    		latlng: new kakao.maps.LatLng($(".campingList").find(".lat").eq(i).val(),$(".campingList").find(".lng").eq(i).val())
-		    }
-		    positions.push(pos);
-		    
-		    pos = null;
-	    }
-	    
-	 
-		
-	    // 마커 이미지의 이미지 크기 입니다
-	    var imageSize = new kakao.maps.Size(35, 35); 
-	    
-	    // 마커 이미지를 생성합니다    
-	    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-	    
-	    // 마커를 생성합니다
-	    var marker = new kakao.maps.Marker({
-	        map: map, // 마커를 표시할 지도
-	        position: positions[i].latlng, // 마커를 표시할 위치
-	        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-	        image : markerImage // 마커 이미지 
-	    });
-	}
-
+	if (markers) {
+        markers.forEach(function(marker) {
+            marker.setMap(null);
+        });
+    }
+    
+    // 마커 배열 초기화
+    markers = [];
+    
+    // 새로운 마커를 추가합니다.
+    positions.forEach(function(position) {
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: position.latlng,
+            title: position.title,
+            
+        });
+        
+        markers.push(marker);
+    });
 }
 
 // 지도를 드래그 하고 놓을 때 중심 좌표 근처 20km 캠핑장 목록을 출력합니다
+// 맵을 다시 생성하는 대신 기존 맵의 중심 좌표를 업데이트합니다.
 kakao.maps.event.addListener(map, 'dragend', function() {
     // 지도의 중심좌표를 얻어옵니다 
     var latlng = map.getCenter(); 
@@ -310,63 +304,51 @@ kakao.maps.event.addListener(map, 'dragend', function() {
     
     positions = [];
     
-    // 지도를 새롭게 호출하여 이전의 모든 마커를 제거합니다
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-    mapOption = { 
-        center: new kakao.maps.LatLng(latlng.getLat(), latlng.getLng()), // 지도의 중심좌표
-        level: 10 // 지도의 확대 레벨
-    };
-
-	map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-    
-    
-    
     $.ajax({
-    	url: basedURL + "/locationBasedList?serviceKey=" + key + "&_type=json&MobileApp=AppTest&MobileOS=ETC&numOfRows=20&pageNo=" + pageNo + "&mapY=" + latlng.getLat() + "&mapX=" + latlng.getLng() + "&radius=20000",
-    	dataType: "JSON",			
-    	success: function(response){
-    		console.log(response);
-    		
-    		var items = response.response.body.items.item;
-    		campingData = response.response.body.items.item;
-    		var output = "";
-    		
-    		
-    		items.forEach(function(item, index){
-    			// 리스트 출력
-    			output += '<div class="row pt-2 pb-2 camping" id="' + item.contentId + '" style="border-bottom: 1px solid #111;">';
-    			output += '<input type="hidden" class="lat" value="'+ item.mapY +'">';
-    			output += '<input type="hidden" class="lng" value="'+ item.mapX +'">';
-    			output += '<div class="col-md-4 p-2"><img alt="" src="' + item.firstImageUrl + '" style="width: 100%;"></div>';
-    			output += '<div class="col-md-6">';
-    			output += '<div class="row mb-2">';
-    			output += '<div class="col-md-12"><span class="campingListSpan">유료캠핑장</span><a class="campingTitle" href="' + index + '"> ' + item.facltNm + '</a></div></div>';
-    			output += '<div class="row mb-2">';
-    			output += item.doNm + ' > ' + item.sigunguNm + '</div>';
-    			output += '<div class="row mb-2">';
-    			output += item.addr1 + '</div>'
-    			output += '<div class="row">';
-    			output += item.tel + '</div>';
-    			output += '</div>';
-    			output += '<div class="col-md-2" style="position: relative;">';
-    			output += '<a href="/reservation?name=' + item.facltNm+ '" class="reservationBtn"><span>예약</span></a>';
-    			output += '</div></div>';
-    			
-    			$('.campingList').append(output);
-    			
-    			output = '';
-    			
-    			positions.push({
-    				title: item.facltNm,
-    				latlng: new kakao.maps.LatLng(item.mapY, item.mapX)
-    			});
-    		});
-    		
-    		marking();
-    	},
-    	error: function(error){
-    		console.error(error);
-    	}
+        url: basedURL + "/locationBasedList?serviceKey=" + key + "&_type=json&MobileApp=AppTest&MobileOS=ETC&numOfRows=20&pageNo=" + pageNo + "&mapY=" + latlng.getLat() + "&mapX=" + latlng.getLng() + "&radius=20000",
+        dataType: "JSON",			
+        success: function(response){
+            console.log(response);
+            
+            var items = response.response.body.items.item;
+            campingData = response.response.body.items.item;
+            var output = "";
+            
+            items.forEach(function(item, index){
+                // 리스트 출력
+                output += '<div class="row pt-2 pb-2 camping" id="' + item.contentId + '" style="border-bottom: 1px solid #111;">';
+                output += '<input type="hidden" class="lat" value="'+ item.mapY +'">';
+                output += '<input type="hidden" class="lng" value="'+ item.mapX +'">';
+                output += '<div class="col-md-4 p-2"><img alt="" src="' + item.firstImageUrl + '" style="width: 100%;"></div>';
+                output += '<div class="col-md-6">';
+                output += '<div class="row mb-2">';
+                output += '<div class="col-md-12"><span class="campingListSpan">유료캠핑장</span><a class="campingTitle" href="' + index + '"> ' + item.facltNm + '</a></div></div>';
+                output += '<div class="row mb-2">';
+                output += item.doNm + ' > ' + item.sigunguNm + '</div>';
+                output += '<div class="row mb-2">';
+                output += item.addr1 + '</div>'
+                output += '<div class="row">';
+                output += item.tel + '</div>';
+                output += '</div>';
+                output += '<div class="col-md-2" style="position: relative;">';
+                output += '<a href="/reservation?name=' + item.facltNm+ '" class="reservationBtn"><span>예약</span></a>';
+                output += '</div></div>';
+                
+                $('.campingList').append(output);
+                
+                output = '';
+                
+                positions.push({
+                    title: item.facltNm,
+                    latlng: new kakao.maps.LatLng(item.mapY, item.mapX)
+                });
+            });
+            
+            marking();
+        },
+        error: function(error){
+            console.error("AJAX error:", error);
+        }
     });
 });
 

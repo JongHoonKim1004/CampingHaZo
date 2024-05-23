@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="searchFooter">
 	<div class="row">
 		<div class="col-md-12">
@@ -16,10 +16,12 @@
 						<li><a href="#">광고 및 제휴문의</a></li>
 						<li><span class="vlineSearch">|</span></li>
 						<li><a href="#">고객센터</a></li>
+						<sec:authorize access="!isAuthenticated()">
 						<li><span class="vlineSearch">|</span></li>
 						<li><a href="#">회원가입</a></li>
 						<li><span class="vlineSearch">|</span></li>
 						<li><a href="#">로그인</a></li>
+						</sec:authorize>
 					</ul>
 				</div>
 				<div class="col-md-4 copyrightSearch">

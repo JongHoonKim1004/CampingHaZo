@@ -16,7 +16,7 @@
 					<div class="row justify-content-md-center">
 						<div class="col-md-3">
 							<div class="row">
-								<button onclick="location.href='/mypage/myReservation'" class="btn btn-primary btn-block">
+								<button onclick="location.href='/mypage/reservation/list'" class="btn btn-primary btn-block">
 									마이페이지로
 								</button>
 							</div>

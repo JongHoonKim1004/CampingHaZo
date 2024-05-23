@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.camping.mapper.UsersCampingMapper">
+    <select id="getList" resultType="com.camping.domain.UsersCampingVO">
+        select * from usersCamping 
+    </select> 
+    
+    <insert id="insert">
+        insert into usersCamping (cno, username, camping, addr, campingNo)
+        values (seq_usersCamping.nextval, #{username}, #{camping}, #{addr}, #{campingNo})
+    </insert>
+    
+    <insert id="insertSelectKey">
+		<selectKey keyProperty="cno" order="BEFORE"
+			resultType="long">
+			select usersCamping.nextval from dual
+		</selectKey>
+		
+		insert into usersCamping (cno, username, addr, campingNo)
+		values (#{cno}, #{username}, #{addr}, #{campingNo})
+	</insert>
+    
+    <select id="read" resultType="com.camping.domain.UsersCampingVO">
+      select * from usersCamping where cno = #{cno}
+    </select>
+    
+    <delete id="delete">
+       delete from usersCamping where cno = #{cno}
+    </delete>
+    
+    <update id="update">
+       update usersCamping
+       set username =  #{username},
+       camping = #{camping},
+       addr = #{addr},
+       campingNo = #{campingNo}
+       where cno = #{cno} 
+      
+    </update>
+    
+    <select id="findByUsername" resultType="com.camping.domain.UsersCampingVO">
+    	select * from usersCamping where username = #{username} order by cno desc
+    </select>
+</mapper>

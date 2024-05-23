@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../includes/header.jsp"%>
 
 <div>
@@ -45,7 +47,7 @@
 
 				</div>
 				<div class="col-md-11"
-					style="border-top: 1px solid black; border-left: 1px solid black;">
+					style="border-top: 1px solid black; border-left: 1px solid black; min-height: 1000px;">
 					<div class="row"
 						style="border-bottom: 1px solid #999; background-color: #CCC;">
 						<form style="padding: 0;">
@@ -74,24 +76,27 @@
 							</div>
 						</form>
 					</div>
-					<div class="row">
+					<div class="row" style="height: 90%;">
 						<div class="col-md-12 noticeList">
-							<div class="row notice">
-								<div class="col-md-2">pic</div>
+							<div class="row notice justify-content-end">
 								<div class="col-md-10">
-									<div class="row">
-										<p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
-											<span>캠핑장</span>
-											title
-										</p>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<span class="noticeSpan">writer</span>
-											<span class="noticeSpan">date</span>
-											<span class="noticeSpan">readcount</span>
+									<c:forEach items="${noticeList }" var="notice">
+										<div class="row" style="border-bottom: 1px solid #f8f8f8">
+											<p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+												<a href="${notice.nno }" class="callNotice">${notice.title }</a>
+											</p>
 										</div>
-									</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span class="noticeSpan">${notice.writer }</span>
+												<span class="noticeSpan">
+													<fmt:formatDate value="${notice.regDate }" pattern="yyyy-MM-dd"/>
+												</span>
+												<span class="noticeSpan">${notice.readCount }</span>
+											</div>
+										</div>
+									</c:forEach>
+									
 								</div>
 							</div>
 						</div>
@@ -99,27 +104,26 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-8 p-4">
+		<div class="col-md-8 p-4" style="border-left: 3px solid #d8d8d8;">
 			<div class="container">
 				<div class="col-md-12">
 					<div class="row contentTitle pb-3 mb-5" style="border-bottom: 1px solid #999;">
 						<div class="col-md-12">
-							<div class="row mb-2">title</div>
-							<div class="row">
-								<div class="col-md-12">
-									<span class="noticeContentSpan" style="margin-left: 0;">writer</span>
-									|
-									<span class="noticeContentSpan">time</span>
-									|
-									<span class="noticeContentSpan">
-										<i class="fa fa-eye"></i>
-										readcount
-									</span>
-								</div>
-							</div>
-						</div>
+		                    <div class="row mb-2 noticeTitle">${noticeList[0].title }</div>
+		                    <div class="row">
+		                        <div class="col-md-12">
+		                            <span class="noticeContentSpan noticeWriter" style="margin-left: 0;">${noticeList[0].writer }</span> |
+		                            <span class="noticeContentSpan noticeRegDate">
+		                            	<fmt:formatDate value="${noticeList[0].regDate }" pattern="yyyy-MM-dd"/>
+		                            </span> |
+		                            <span class="noticeContentSpan noticeReadCount">
+		                                <i class="fa fa-eye"></i> ${noticeList[0].readCount }
+		                            </span>
+		                        </div>
+		                    </div>
+		                </div>
 					</div>
-					<div class="noticeContent"> content</div>
+					<div class="noticeContent"> ${noticeList[0].content }</div>
 				</div>
 			</div>
 		</div>
@@ -132,5 +136,48 @@
 		$('[data-toggle="tooltip1"]').tooltip();
 		$('[data-toggle="tooltip2"]').tooltip();
 		$('[data-toggle="tooltip3"]').tooltip();
+		
+		// 누르면 공지사항 호출
+		$(".callNotice").on("click", function(e){
+			e.preventDefault();
+			var num = $(this).attr("href");
+			console.log("call notice, nno : " + num);
+			
+			// 이전 내용 초기화
+			$(".noticeTitle").html("");
+		    $(".noticeWriter").html("");
+		    $(".noticeRegDate").html("");
+		    $(".noticeReadCount").html("");
+		            
+		    $(".noticeContent").html("");
+			
+			// 부를 내용 호출
+			$.ajax({
+		        url: "/notice/read/nno/" + num,
+		        method: "GET",
+		        success: function(data){
+		            console.log(data);
+
+		            // 날짜 포맷팅
+		            var regDate = new Date(data.regDate).toLocaleDateString();
+
+		            
+
+		            // 컨텐츠 추가
+		            $(".noticeTitle").append(data.title);
+		            $(".noticeWriter").append(data.writer);
+		            $(".noticeRegDate").append(regDate);
+		            $(".noticeReadCount").append(data.readCount);
+		            
+		            $(".noticeContent").html(data.content);
+		        },
+		        error: function(xhr, status, error){
+		            console.error("AJAX Error: ", status, error);
+		        }
+		    });
+		})
 	});
+</script>
+<script>
+	
 </script>

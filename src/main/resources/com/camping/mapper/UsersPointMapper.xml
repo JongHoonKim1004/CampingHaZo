@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.camping.mapper.UsersPointMapper">
+    <select id="getList" resultType="com.camping.domain.UsersPointVO">
+        select * from usersPoint 
+    </select> 
+    
+    <insert id="insert">
+       insert into usersPoint (pno, username, point)
+       values (seq_usersPoint.nextval, #{username}, #{point})
+    </insert>
+    
+    <insert id="insertSelectKey">
+		<selectKey keyProperty="pno" order="BEFORE"
+			resultType="long">
+			select seq_usersPoint.nextval from dual
+		</selectKey>
+		
+		insert into usersPoint (pno, username, point)
+		values (#{pno}, #{username}, #{point})
+	</insert>
+    
+    <select id="read" resultType="com.camping.domain.UsersPointVO">
+       select * from usersPoint where pno = #{pno}
+    </select>
+    
+    <delete id="delete">
+      delete from usersPoint where pno =#{pno}
+    </delete>
+    
+    <update id="update">
+      update usersPoint
+      set username = #{username},
+      point = #{point}
+      where pno = #{pno}
+    </update>
+    
+    <select id='findByUsername' resultType="com.camping.domain.UsersPointVO">
+    	select * from usersPoint where username = #{username}
+    </select>
+</mapper>

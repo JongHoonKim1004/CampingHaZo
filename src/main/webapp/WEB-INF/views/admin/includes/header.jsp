@@ -10,9 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- Favicon -->
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+	<!-- JQuery -->
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.0.min.js"></script>
+	
 
     <!-- DEMO CHARTS -->
     <link rel="stylesheet" href="/resources/public/demo/chartist.css">
@@ -52,7 +55,6 @@
                     <i class="gd-align-left"></i>
                 </a>
                 <!-- End Side Nav Toggle -->
-
                 <!-- User Notifications -->
                 <div class="dropdown ml-auto">
                     <a id="notificationsInvoker" class="header-invoker" href="#" aria-controls="notifications" aria-haspopup="true" aria-expanded="false" data-unfold-event="click" data-unfold-target="#notifications" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-animation-in="fadeIn" data-unfold-animation-out="fadeOut">
@@ -116,7 +118,7 @@
                             </a>
                         </li>
                         <li class="unfold-item unfold-item-has-divider">
-                            <a class="unfold-link d-flex align-items-center text-nowrap" href="#">
+                            <a class="unfold-link d-flex align-items-center text-nowrap" href="/admin/logout">
                     <span class="unfold-item-icon mr-3">
                       <i class="gd-power-off"></i>
                     </span>

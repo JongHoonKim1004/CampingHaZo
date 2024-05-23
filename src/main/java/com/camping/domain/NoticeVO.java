@@ -13,6 +13,6 @@ public class NoticeVO {
 	 private String writer;
 	 private Date regDate;
 	 private Date updateDate;
-	 private int readCount;
+	 private int readCount; // 게시글 조회수 
 	 
 }

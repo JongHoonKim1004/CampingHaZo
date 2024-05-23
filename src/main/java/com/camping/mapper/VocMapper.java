@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.VocVO;
 
 public interface VocMapper {
@@ -20,4 +21,7 @@ public interface VocMapper {
      
      public int update(VocVO vno);
      
+   public List<VocVO> getListWithPaging(Criteria cri);
+     
+   public List<VocVO> getListForAdmin();
 }

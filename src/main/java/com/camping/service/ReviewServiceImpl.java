@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.ReviewVO;
 import com.camping.mapper.ReviewMapper;
 
@@ -50,5 +51,35 @@ public class ReviewServiceImpl implements ReviewService{
 		log.info("getList");
 		return mapper.getList();
 	}
+
+	@Override
+	public void readCount(Long rno) {
+		
+		mapper.readCount(rno);
+		
+	}
+	
+	@Override
+	public int getTotal(Criteria cri) {
+		
+		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public List<ReviewVO> getListByWriter(String writer) {
+		  log.info("writer");
+		return mapper.getListByWriter(writer);
+	}
+
+
+	@Override
+	public List<ReviewVO> getListWithPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getListWithPaging(cri);
+	}
+
+	
+
+	
 
 }

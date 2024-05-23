@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="./includes/header.jsp"%>
 
 <main class="main">
@@ -11,7 +13,7 @@
 			</div>
 
 			<!-- upper menu -->
-			<div class="row mb-3">
+			<div class="row mb-5 pb-5">
 				<div class="col-md-6 col-xl-4 mb-3 mb-xl-4">
 					<!-- Widget -->
 					<div class="card flex-row align-items-center p-3 p-md-4">
@@ -61,37 +63,29 @@
 
 			<!-- middle menu -->
 			<!-- 새로 등록된 예약 -->
-			<div class="tab-pane fade show mb-3" id="pills-result-1"
+			<div class="tab-pane fade show mb-5 pb-5" id="pills-result-1"
 				role="tabpanel" aria-labelledby="pills-result-tab-1">
 				<h2 class="h4">새로 등록된 예약</h2>
 				<table class="table bg-white">
 					<thead>
 						<tr>
 							<th class="font-weight-semi-bold border-top-0 py-2">#</th>
-							<th class="font-weight-semi-bold border-top-0 py-2">First</th>
-							<th class="font-weight-semi-bold border-top-0 py-2">Last</th>
-							<th class="font-weight-semi-bold border-top-0 py-2">Handle</th>
+							<th class="font-weight-semi-bold border-top-0 py-2">예약자</th>
+							<th class="font-weight-semi-bold border-top-0 py-2">예약한 캠핑장</th>
+							<th class="font-weight-semi-bold border-top-0 py-2">에약일</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-3">1</td>
-							<td class="py-3">Mark</td>
-							<td class="py-3">Otto</td>
-							<td class="py-3">@mdo</td>
-						</tr>
-						<tr>
-							<td class="py-3">2</td>
-							<td class="py-3">Jacob</td>
-							<td class="py-3">Thornton</td>
-							<td class="py-3">@fat</td>
-						</tr>
-						<tr>
-							<td class="py-3">3</td>
-							<td class="py-3">Larry</td>
-							<td class="py-3">the Bird</td>
-							<td class="py-3">@twitter</td>
-						</tr>
+						<c:forEach items="${reservationList }" var="reservation">
+							<tr>
+								<td class="py-3">${reservation.rno }</td>
+								<td class="py-3">${reservation.username }</td>
+								<td class="py-3">${reservation.name }</td>
+								<td class="py-3">
+									<fmt:formatDate value="${reservation.resDate }" pattern="yyyy-MM-dd"/>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -105,30 +99,22 @@
 					<thead>
 						<tr>
 							<th class="font-weight-semi-bold border-top-0 py-2">#</th>
-							<th class="font-weight-semi-bold border-top-0 py-2">First</th>
-							<th class="font-weight-semi-bold border-top-0 py-2">Last</th>
-							<th class="font-weight-semi-bold border-top-0 py-2">Handle</th>
+							<th class="font-weight-semi-bold border-top-0 py-2">제목</th>
+							<th class="font-weight-semi-bold border-top-0 py-2">작성자</th>
+							<th class="font-weight-semi-bold border-top-0 py-2">작성일</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="py-3">1</td>
-							<td class="py-3">Mark</td>
-							<td class="py-3">Otto</td>
-							<td class="py-3">@mdo</td>
-						</tr>
-						<tr>
-							<td class="py-3">2</td>
-							<td class="py-3">Jacob</td>
-							<td class="py-3">Thornton</td>
-							<td class="py-3">@fat</td>
-						</tr>
-						<tr>
-							<td class="py-3">3</td>
-							<td class="py-3">Larry</td>
-							<td class="py-3">the Bird</td>
-							<td class="py-3">@twitter</td>
-						</tr>
+						<c:forEach items="${vocList }" var="voc">
+							<tr>
+								<td class="py-3">${voc.vno }</td>
+								<td class="py-3">${voc.title }</td>
+								<td class="py-3">${voc.writer }</td>
+								<td class="py-3">
+									<fmt:formatDate value="${voc.regDate }" pattern="yyyy-MM-dd"/>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
