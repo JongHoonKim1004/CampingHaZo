@@ -112,13 +112,13 @@
   * 메인 페이지 우측 상단의 `로그인`을 클릭하면 로그인 창이 나타난다.
   * `로그인` 옆의 `회원가입`을 클릭하면 회원가입 창이 나타난다. `중복 확인`을 클릭하면 아이디 중복 확인, `우편번호 찾기`를 클릭하면 DAUM 주소 찾기 API를 통한 주소 검색 페이지가 팝업창으로 나타난다.
     
-![KakaoTalk_20240523_151436657](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/1f8abb3e-5c8a-42bf-8fe0-f04f063590a0)
+  ![KakaoTalk_20240523_151436657](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/1f8abb3e-5c8a-42bf-8fe0-f04f063590a0)
 
 
  * **소셜 로그인**
   * `로그인` 을 통해 나온 로그인 창에서 `카카오 로그인`을 클릭하여 카카오 계정을 통해 로그인 할 수 있다
 
-![소셜 로그인](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/e131833e-d172-467c-a7f8-0c858013d57d)
+  ![소셜 로그인](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/e131833e-d172-467c-a7f8-0c858013d57d)
 
  * **캠핑장 검색**
   * 메인 페이지의 `전체`를 클릭하면 지도와 함께 캠핑장 목록이 호출된다. 또한, 지도에 목록이 있는 캠핑장의 위치가 마커로 표시된다
