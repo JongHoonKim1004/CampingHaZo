@@ -124,7 +124,7 @@
   * 메인 페이지의 `전체`를 클릭하면 지도와 함께 캠핑장 목록이 호출된다. 또한, 지도에 목록이 있는 캠핑장의 위치가 마커로 표시된다
   * 지도를 움직하면 지도의 중심에서 20km 내의 캠핑장을 재호출하고, 마커로 새롭게 호출된다
 
-![KakaoTalk_20240523_151428912](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/de76a22f-d268-4814-8cb3-c13f6a0d8c5a)
+  ![KakaoTalk_20240523_151428912](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/de76a22f-d268-4814-8cb3-c13f6a0d8c5a)
 
 
  * **캠핑장 예약**
@@ -132,36 +132,36 @@
   * `예약 날짜`를 클릭하면 DateRangePicker를 통해 달력을 불러온다
   * 시작일과 종료일을 정하면 서버에서 해당 기간에 예약이 존재하는지 확인 후 결과를 알려준다
  
-![캠핑장 예약 (2)](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/cd2740c4-97e1-49a0-96cf-d4765ad045a1)
+  ![캠핑장 예약 (2)](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/cd2740c4-97e1-49a0-96cf-d4765ad045a1)
 
  * **마이페이지 - 포인트 이력**
   * 일반회원으로 로그인 후 `마이페이지` -> 좌측 사이드바에서 `포인트`를 클릭하면 현재 포인트와 포인트 이력을 확인할 수 있다
 
-![포인트 이력](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/21a56917-12d5-42a8-9e98-76f0cd9c691c)
+  ![포인트 이력](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/21a56917-12d5-42a8-9e98-76f0cd9c691c)
 
  * **리뷰**
   * 우측 상단의 `공지사항`을 통해 공지사항 페이지로 이동 후, 말풍선 아이콘을 클릭하여 리뷰 게시판으로 이동할 수 있다
   * 리뷰는 본인이 올린 글 외에는 수정, 삭제가 불가능하다
 
- ![리뷰작성](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/f70a83e5-1fd5-47d2-a996-bffcbd8ed764)
+  ![리뷰작성](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/f70a83e5-1fd5-47d2-a996-bffcbd8ed764)
 
  * **1:1 문의**
   *  1:1 문의 페이지는 헤더 우측의 `고객센터` 혹은 공지사항, 리뷰 게시판에서 좌측 편지 아이콘을 클릭하여 이동할 수 있다
   *  일반회원만 이 페이지에 접근할 수 있다
 
-![1대1문의](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/0eb1e10e-6e10-4e26-86ac-b591638db241)
+  ![1대1문의](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/0eb1e10e-6e10-4e26-86ac-b591638db241)
 
 * **사업자 페이지**
   
  * **사업자 로그인**
   * 사업자 로그인은 메인 페이지 하단의 `사업자 로그인` 을 통해 접근할 수 있다
 
-   ![사업자 로그인](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/d62dcebc-d25d-47fb-8162-954c3033f745)
+  ![사업자 로그인](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/d62dcebc-d25d-47fb-8162-954c3033f745)
 
  * **캠핑장 등록**
   * 사업자 페이지의 `캠핑장 등록` 을 통해서 새 캠핑장을 등록할 수 있다
 
-![캠핑장 등록](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/7798a1f5-0628-4369-a2ed-d514437bae88)
+  ![캠핑장 등록](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/7798a1f5-0628-4369-a2ed-d514437bae88)
 
 
  
