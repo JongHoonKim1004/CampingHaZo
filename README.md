@@ -164,6 +164,14 @@
 
   ![캠핑장 등록](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/7798a1f5-0628-4369-a2ed-d514437bae88)
 
+* **관리자 페이지**
 
- 
+ * **공지사항**
+  * 관리자 로그인 후 관리자 페이지에서 `공지사항`을 클릭하면 공지사항 목록으로 이동한다
+  * `새 공지 등록하기`을 클릭하면 공지사항 작성페이지로 이동한다 
+
+  ![공지사항](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/4af391cf-7f8a-45da-b333-36e097072cf6)
+
+
+  
 </details>
