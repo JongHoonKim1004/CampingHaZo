@@ -65,18 +65,12 @@
 								<img alt="" src="/resources/img/main/two-speech-bubbles.svg">
 								<span>알려드립니다</span>
 								<div style="float: right;">
-									<a href="#"><span>+</span></a>
+									<a href="notice/list"><span>+</span></a>
 								</div>
 							</div>
 						</div>
 						<div class="row justify-content-md-center pt-2 main-notice-list">
 							<div class="col-md-10">
-								<p>
-									<a href="#" class="mainNoticeList">공지사항 테스트</a>
-								</p>
-								<p>
-									<a href="#" class="mainNoticeList">공지사항 테스트</a>
-								</p>
 
 							</div>
 						</div>

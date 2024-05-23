@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.camping</groupId>
+	<groupId>com.dino</groupId>
 	<artifactId>controller</artifactId>
 	<name>MybatisTest3</name>
 	<packaging>war</packaging>
@@ -160,7 +160,90 @@
     <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
     <version>1.16</version>
 </dependency>
+     
+          <!-- Jackson 라이브러리를 사용하여 JSON 데이터와 Java 객체 간의 매핑을 처리하는데 필요한 의존성 설정 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.16.1</version>
+		</dependency>
 
+                       <!-- Jackson 라이브러리를 사용하여 XML 데이터와 Java 객체 간의 매핑을 처리하는데 필요한 의존성 설정 -->
+                       <dependency>
+                                  <groupId>com.fasterxml.jackson.dataformat</groupId>
+                                  <artifactId>jackson-dataformat-xml</artifactId>
+                                  <version>2.16.1</version>
+                       </dependency>
+ 
+                       <!-- Google Gson 라이브러리를 사용하여 JSON 데이터와 Java 객체 간의 매핑을 처리하는데 필요한 의존성 설정 -->
+                       <dependency>
+                                 <groupId>com.google.code.gson</groupId>
+                                 <artifactId>gson</artifactId>
+                                 <version>2.10.1</version>
+                       </dependency>
+
+                      <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok getter, 
+			setter, 생성자 등의 코드를 간소화 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+	<groupId>com.fasterxml.jackson.core</groupId>
+	<artifactId>jackson-databind</artifactId>
+	<version>2.16.1</version>
+</dependency>
+
+<!-- XML 데이터를 Java 객체로 변환하고, Java 객체를 XML로 변환하는 기능을 제공하는 Jackson Dataformat XML 라이브러리 -->
+<dependency>
+	<groupId>com.fasterxml.jackson.dataformat</groupId>
+	<artifactId>jackson-dataformat-xml</artifactId>
+	<version>2.16.1</version>
+</dependency>
+
+<!-- JSON 데이터를 다루는 데 유용한 Gson 라이브러리 -->
+<dependency>
+	<groupId>com.google.code.gson</groupId>
+	<artifactId>gson</artifactId>
+	<version>2.10.1</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.2.7.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>5.2.7.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.2.7.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>5.2.7.RELEASE</version>
+		</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+<dependency>
+    <groupId>com.googlecode.json-simple</groupId>
+    <artifactId>json-simple</artifactId>
+    <version>1.1.1</version>
+</dependency>
+       
 
 	</dependencies>
 	<build>

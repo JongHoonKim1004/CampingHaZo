@@ -2,12 +2,15 @@ package com.camping.service;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.ReviewVO;
 
 import lombok.extern.log4j.Log4j;
@@ -41,7 +44,8 @@ public class ReviewServiceTests {
 	
 	@Test
 	public void testGetList() {
-		    service.getList().forEach(review -> log.info(review));
+		  List<ReviewVO> list = service.getListWithPaging(new Criteria(1,5));
+		  list.forEach(review -> log.info(review));
 	}
 	
 	@Test

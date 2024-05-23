@@ -13,7 +13,8 @@
 						</h1>
 					</div>
 				</div>
-				<form>
+				<form action="/voc/register" method="post" name="frm">
+				
 					<div class="row mb-3">
 						<div class='col-md-12'>
 							<div class="row form-group">
@@ -32,7 +33,7 @@
 						<div class='col-md-12'>
 							<div class="row form-group">
 								<div class="col-md-1">
-									<label for="writer" class="form-label">성 함</label> 
+									<label for="writer" class="form-label">이메일</label> 
 								</div>
 								<div class="col-md-5">
 									<input type="text" class="form-control" name="writer" id="writer">
@@ -40,21 +41,21 @@
 							</div>
 						</div>
 					</div>
+					<div class="row mb-3">
+						<div class='col-md-12'>
+							<div class="row form-group">
+								<div class="col-md-1">
+									<label for="phone" class="form-label">연락처</label> 
+								</div>
+								<div class="col-md-5">
+									<input type="text" class="form-control" name="phone" id="phone">
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div class="row">	
-						<div class='col-md-12'>
-							<div class="row form-group">
-								<label for="email" class="col-md-1">이메일</label> <input
-									type="email" class="col-md-5 form-control" name="email"
-									id="email">
-							</div>
-						</div>
-						<div class='col-md-12'>
-							<div class="row form-group">
-								<label for="phone" class="col-md-1">연락처</label> <input
-									type="text" class="col-md-5 form-control" name="phone"
-									id="phone">
-							</div>
-						</div>
+						
 						<div class='col-md-12'>
 							<div class="row form-group">
 								<label for="content" class="col-md-1">내용</label>

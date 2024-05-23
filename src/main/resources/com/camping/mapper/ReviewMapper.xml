@@ -8,35 +8,57 @@
     </select> 
     
     <insert id="insert">
-		insert into review (rno, cno, title, content, writer,readCount)
-		values (seq_review.nextval, ${cno}, #{title}, #{content}, #{writer},#{readCount})
-	</insert>
-	
-	<insert id="insertSelectKey">
-	      <selectKey keyProperty="rno" order="BEFORE" resultType="long">
-	          select seq_review.nextval from dual
-	      </selectKey>
-	      
-	      insert into review (rno, cno, title, content, writer, readCount)
-	      values (#{rno},#{cno}, #{title}, #{content},#{writer}, #{readCount})
-	</insert>
-	
-	<select id="read" resultType="com.camping.domain.ReviewVO">
-	  select * from review where rno = #{rno}
-	</select>
-	
-	<delete id="delete">
-	   delete from review where rno = #{rno}
-	</delete>
+        insert into review (rno, camping, title, content, writer, readCount)
+        values (seq_review.nextval, #{camping, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{writer, jdbcType=VARCHAR}, #{readCount, jdbcType=INTEGER})
+    </insert>
+    
+    <insert id="insertSelectKey">
+        <selectKey keyProperty="rno" order="BEFORE" resultType="long">
+            select seq_review.nextval from dual
+        </selectKey>
+        insert into review (rno, camping, title, content, writer, readCount)
+        values (#{rno, jdbcType=INTEGER}, #{camping, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{writer, jdbcType=VARCHAR}, #{readCount, jdbcType=INTEGER})
+    </insert>
+    
+    <select id="read" resultType="com.camping.domain.ReviewVO">
+        select * from review where rno = #{rno, jdbcType=INTEGER}
+    </select>
+    
+    <delete id="delete">
+        delete from review where rno = #{rno, jdbcType=INTEGER}
+    </delete>
     
     <update id="update">
-       update review
-       set title = #{title},
-       content = #{content},
-       writer = #{writer},
-       updateDate = sysdate,
-       readCount = #{readCount}
-       where rno = #{rno}
+        update review
+        set title = #{title, jdbcType=VARCHAR},
+            content = #{content, jdbcType=VARCHAR},
+            writer = #{writer, jdbcType=VARCHAR},
+            updateDate = sysdate,
+            readCount = #{readCount, jdbcType=INTEGER},
+            camping = #{camping, jdbcType=VARCHAR}
+        where rno = #{rno, jdbcType=INTEGER}
     </update>
     
+    <update id="readCount">
+        update review
+        set readCount = readCount + 1
+        where rno = #{rno, jdbcType=INTEGER}
+    </update>
+    
+    <select id="getListWithPaging" resultType="com.camping.domain.ReviewVO">
+        <![CDATA[
+            select rno, camping, title, content, writer, regDate, updateDate, readCount from (
+            select /*+INDEX_DESC(review review_pk)*/ rownum rn, rno, camping, title, content, writer,
+            regDate, updateDate, readCount from review where rownum <= #{pageNum, jdbcType=INTEGER} * #{amount, jdbcType=INTEGER}
+            ) where rn > (#{pageNum, jdbcType=INTEGER} - 1) * #{amount, jdbcType=INTEGER}
+        ]]>
+    </select>
+    
+    <select id="getTotalCount" resultType="int">
+        select count(*) from review 
+    </select>
+    
+    <select id="getListByWriter" resultType="com.camping.domain.ReviewVO">
+        select * from review where writer = #{writer, jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -2,12 +2,15 @@ package com.camping.service;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.VocVO;
 
 import lombok.extern.log4j.Log4j;
@@ -20,24 +23,21 @@ public class VocServiceTests {
 	@Autowired
 	private VocService service;
 	
-//	@Test
-//	public void testExist() {
-//		   log.info(service);
-//		   assertNotNull(service);
-//	}
 	
 	@Test
 	public void testRegister() {
 		 VocVO voc = new VocVO();
-		 voc.setTitle("새로운 나문의");
-		 voc.setContent("새로 작성하는");
+		 voc.setTitle("5/07 test");
+		 voc.setContent("5/07 test");
 		 voc.setWriter("zee0542@naver.com");
-		 log.info("생성된 문의 번호 :" + voc.getVno());
+		 service.register(voc);
+		 log.info("생성된 게시물:" + voc.getVno());
 	}
 	
 	@Test
 	public void testGetList() {
-		   service.getList().forEach(voc ->log.info(voc));
+		  List<VocVO> list = service.getList();
+		  list.forEach(voc -> log.info(voc));
 	}
 	
 	@Test

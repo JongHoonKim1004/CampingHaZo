@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.NoticeVO;
 import com.camping.mapper.NoticeMapper;
 
@@ -42,12 +43,44 @@ public class NoticeServiceImpl implements NoticeService {
 		 log.info("remove..." + nno);
 		return mapper.delete(nno)==1;
 	}
+	
+
+	   @Override
+	   public List<NoticeVO> getListWithPaging(Criteria cri) {
+	       log.info("getList.....");
+	       //return mapper.getList();   // 데이터 100만개
+	       return mapper.getListWithPaging(cri); // 페이지 당 갯수
+	    }
+
+	@Override
+	public int getTotal(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public void readCount(Long nno) {
+		log.info("readCount :"+ nno);
+		mapper.readCount(nno);
+		
+		
+	}
+
+	@Override
+	public List<NoticeVO> getRecentNotices(int count) {
+		
+		return mapper.getRecentNotices(count);
+	}
 
 	@Override
 	public List<NoticeVO> getList() {
-		 log.info("getList....");
+		// TODO Auto-generated method stub
 		return mapper.getList();
 	}
+
+
+
+	
 	   
 	   
 }

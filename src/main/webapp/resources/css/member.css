@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.spanNumber {
+ 	margin-bottom: 1.5rem;
+ 	font-size: 40px;
+ 	font-weight: 700;
+}
+
+.form-label {
+	line-height: 35px;
+	font-size: 20px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+}

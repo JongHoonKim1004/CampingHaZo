@@ -2,6 +2,7 @@ package com.camping.service;
 
 import java.util.List;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.VocVO;
 
 public interface VocService {
@@ -15,5 +16,7 @@ public interface VocService {
 	   public boolean remove(Long vno);
 	   
 	   public List<VocVO> getList();
+
+	   public List<VocVO> getListForAdmin();
 
 }

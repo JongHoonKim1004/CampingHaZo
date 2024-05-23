@@ -1,10 +1,10 @@
 @charset "UTF-8";
 a {
-	text-decoration: none;	
+	text-decoration: none !important;	
 }
 
 a:hover {
-	text-decoration: none;
+	text-decoration: none !important;
 }
 
 .header {
@@ -112,6 +112,11 @@ a:hover {
 	width: 100%;
 }
 
+.memberFooter {
+	background-color: #111;
+	width: 100%;
+}
+
 .footer_logo {
 	float: left;
 	font-size: 24px;
@@ -149,4 +154,15 @@ a:hover {
 	display: inline-block;
 	color: #666;
 	margin: 0 12px;
+}
+
+.logoAnchor {
+	width: 100%;
+	display: block;
+}
+
+.logo {
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
 }

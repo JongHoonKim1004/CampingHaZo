@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .campingListRow {
-	max-height: 770px;
+	max-height: 680px;
 }
 
 .campingSpan {
@@ -99,4 +99,10 @@
 .reservationImg img {
 	width: 100%;
 
+}
+
+.totalmoney {
+	text-align: right;
+	font-size: 45px;
+	font-weight: bold;
 }

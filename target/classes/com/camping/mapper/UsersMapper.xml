@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.camping.mapper.UsersMapper">
+      
+      <select id="getList" resultType="com.camping.domain.UsersVO">
+        select * from users
+      </select>
+      
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="uno" order="BEFORE"
+			resultType="long">
+			select seq_users.nextval from dual
+		</selectKey>
+		
+		insert into users (uno, username, name, password, phone, addr, addrDetail, zipCode)
+		values (#{uno}, #{username}, #{name}, #{password},#{phone},#{addr},#{addrDetail},#{zipCode})
+	</insert>
+      
+      
+      
+       <select id="insert">
+           insert into users (uno, username, name, password, phone, addr, addrDetail, zipCode)
+           values (seq_users.nextval, #{username}, #{name}, #{password}, #{phone}, #{addr},#{addrDetail},#{zipCode})
+       </select>
+       
+       <select id="read" resultType="com.camping.domain.UsersVO">
+          select * from users where uno = #{uno} 
+       </select>
+       
+       <delete id="delete">
+           delete from users where uno = #{uno}
+       </delete>
+       
+       <update id="update">
+          update users
+          set username = #{username},
+          name = #{name},
+          password = #{password},
+          phone = #{phone},
+          addr = #{addr},
+          addrDetail = #{addrDetail},
+          zipCode = #{zipCode}
+          where uno = #{uno}
+       </update>
+       
+       <select id="findByUsername" parameterType="java.lang.String" resultType="com.camping.domain.UsersVO">
+       	select * from users where username = #{username}
+       </select>
+  </mapper>

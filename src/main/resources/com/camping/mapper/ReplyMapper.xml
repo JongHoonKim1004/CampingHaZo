@@ -20,5 +20,11 @@
 		update reply set title = #{title}, regDate = sysdate
 		where rno = #{rno}
 	</update> 
+	
+	<select id="getList" resultType="com.camping.domain.ReplyVO">
+	   select rno, vno, title, content, writer, regDate from reply
+	   where vno = #{vno}
+	   order by rno asc
+	</select>
 	  
 </mapper>

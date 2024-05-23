@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.VocVO;
 import com.camping.mapper.VocMapper;
 
@@ -49,5 +50,13 @@ public class VocServiceImpl implements VocService {
 		log.info("getList...");
 		return mapper.getList();
 	}
+
+	@Override
+	public List<VocVO> getListForAdmin() {
+		// TODO Auto-generated method stub
+		return mapper.getListForAdmin();
+	}
+
+	
 
 }

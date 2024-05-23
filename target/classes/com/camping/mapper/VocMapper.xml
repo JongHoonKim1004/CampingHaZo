@@ -37,5 +37,20 @@
          updateDate = sysdate
          where vno = #{vno}
       </update>
+      
+      <select id="getListWithPaging" resultType="com.camping.domain.VocVO"> 
+	<![CDATA[ 
+		select vno, title, content, writer, regdate, updateDate from ( 
+		select /*+INDEX_DESC(voc pk_voc) */ rownum rn, vno, title, content, 
+		writer, regdate, updatedate from voc where rownum <= #{pageNum} * #{amount}
+		) where rn > (#{pageNum} -1) * #{amount}
+	]]> 
+</select>
+
+	<select id="getListForAdmin" resultType="com.camping.domain.VocVO">
+		<![CDATA[
+			select rownum, vno, title, content, writer, regDate, updateDate from voc where rownum < 4 order by vno desc
+		]]>
+	</select>
      
 </mapper>

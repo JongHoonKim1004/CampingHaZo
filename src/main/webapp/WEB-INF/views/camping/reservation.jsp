@@ -56,11 +56,23 @@
 				<div class="row mt-4 mb-4 justify-content-md-center">
 					<div class="col-md-8">
 						<div class="row">
-							<div class="col-md-2">
+							<div class="col-md-3">
+								<label class="form-label">가격(1박당)</label>
+							</div>
+							<div class="col-md-9">
+								<input type="number" class="form-control-plaintext" name="moneyper" id="moneyper" readOnly value="20000">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-4 mb-4 justify-content-md-center">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-3">
 								<label class="form-label">인원수</label>
 							</div>
-							<div class="col-md-10">
-								<input type="number" class="form-control" name="people" id="people">
+							<div class="col-md-9">
+								<input type="number" class="form-control" name="people" id="people" value="1">
 							</div>
 						</div>
 					</div>
@@ -68,12 +80,28 @@
 				<div class="row mb-4 justify-content-md-center">
 					<div class="col-md-8">
 						<div class="row">
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<label class="form-label">에약 날짜</label>
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-9">
 								<input type="text" name="daterange" id="demo" class="form-control" value="">
 								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-4 justify-content-md-center">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-3">
+								<label class="form-label">총 금액</label>
+							</div>
+							<div class="col-md-8">
+								<input type="number" class="form-control-plaintext totalmoney" style="color: salmon" name="money" id="money" readOnly value="20000" readOnly>
+								
+							</div>
+							<div class="col-md-1">
+								<span style="display: flex; padding-top: 40px;"> 원</span>
 							</div>
 						</div>
 					</div>
@@ -87,14 +115,13 @@
 				<div class='row mb-4 justify-content-md-center'>
 					<div class="col-md-4">
 						<div class="row">
-							<button class="btn btn-primary btn-block" type="submit" onclick="return reservationCheck()">예 약 하 기</button>
+							<button class="btn btn-primary btn-block" id="submitbtn" type="submit" onclick="return reservationCheck()">예 약 하 기</button>
 						</div>
 					</div>
-					<input type="hidden" name="username">
+					<input type="hidden" name="username" value="${username }">
 					<input type="hidden" name="startdate">
 					<input type="hidden" name="enddate">
-					<input type="hidden" name="camping">
-					<input type="hidden" name="money">
+					<input type="hidden" name="name" value="${name }">
 				</div>
 			</form>
 		</div>
@@ -160,6 +187,13 @@ $(function(){
 
 <!-- Date Range Picker -->
 <script type="text/javascript">
+//서버에서 받아온 캠핑장 이름 설정
+const camping = `${name}`;
+
+// 날짜 설정 이전까지는 버튼 작동 안되도록
+$("#submitbtn").attr("disabled", true);
+$(".reservation-invalid").hide();
+
 $('#demo').daterangepicker({
     "locale": {
         "format": "YYYY/MM/DD",
@@ -205,12 +239,52 @@ $('#demo').daterangepicker({
 	// 날짜 추출
 	var startdate = start.format("YYYYMMDD"); 
 	var enddate = end.format("YYYYMMDD");
-	
+
+  	var startTimestamp = start.unix();
+    var endTimestamp = end.unix();
+    
 	// input 넣기
   	$("input[name='startdate']").val(startdate);
   	$("input[name='enddate']").val(enddate);
   	
+  	
+    
   	// ajax 로 확인
+  	$(".reservation-invalid").hide();
+  	$.ajax({
+        url: '/camping/reservation/check/' + camping + '/' + startTimestamp + '/' + endTimestamp,
+        method: 'GET',
+        success: function(result, textStatus, jqXHR) {
+            if (jqXHR.status !== 200) {
+                console.log(result);
+                alert("예약이 가능합니다. 예약하기 버튼으로 예약을 진행해주세요.");
+                $("#submitbtn").attr("disabled", false);
+                // 예약이 없는 경우 추가 동작
+                var totalPrice = (parseInt(enddate) - parseInt(startdate) + 1) * 20000;
+                $("#money").val(totalPrice);
+            } else {
+                console.log(result);
+                alert("이미 예약이 존재합니다. 다른 날짜에 예약해주세요");
+                $(".reservation-invalid").hide();
+                $("#submitbtn").attr("disabled", true);
+                // 예약이 있는 경우 추가 동작
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+        	if(jqXHR.status === 409){
+                alert("이미 예약이 존재합니다. 다른 날짜에 예약해주세요");
+                $(".reservation-invalid").hide();
+                $("#submitbtn").attr("disabled", true);
+                // 예약이 있는 경우 추가 동작
+        	} else {
+        		console.error('예약 확인 중 오류 발생:', textStatus, errorThrown);
+                // 오류 처리
+        	}
+            
+        }
+    });
+  	
+  	
 });
 
 </script>
@@ -220,7 +294,7 @@ $('#demo').daterangepicker({
 $("#people").on("change", function(e){
 	let people = $(this).val();
 	
-	if(people < 0){
+	if(people < 1){
 		alert("그 이상으로 줄일 수 없습니다.");
 		$(this).val(1);
 	}
@@ -229,15 +303,10 @@ $("#people").on("change", function(e){
 		alert("예약은 한 번에 4명까지 가능합니다.");
 		$(this).val(4);
 	}
+	
+	
 });
 
-</script>
-
-<!-- 날짜 정하면 ajax 호출할 작업 -->
-<script type="text/javascript">
-	$(".reservation-invalid").hide();
-	
-	// ajax 호출
 </script>
 
 <!-- 예약하기 버튼 누르고 확인 작업 -->

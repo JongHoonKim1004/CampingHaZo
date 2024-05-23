@@ -1,7 +1,10 @@
 package com.camping.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.camping.domain.Criteria;
 import com.camping.domain.ReplyVO;
 import com.camping.mapper.ReplyMapper;
 
@@ -16,27 +19,36 @@ public class ReplyServiceImpl implements ReplyService {
 	private ReplyMapper mapper;
 	
 	@Override
-	public int register(ReplyVO vo) {
+	public void register(ReplyVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		log.info("register : " + vo);
+		mapper.insert(vo);
 	}
 
 	@Override
 	public ReplyVO get(Long rno) {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.read(rno);
 	}
 
 	@Override
 	public int modify(ReplyVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return mapper.update(vo);
 	}
 
 	@Override
 	public int remove(Long rno) {
 		// TODO Auto-generated method stub
-		return 0;
+		return mapper.delete(rno);
 	}
+
+	@Override
+	public List<ReplyVO> getList(Long vno) {
+		// TODO Auto-generated method stub
+		return mapper.getList(vno);
+	}
+
+	
 
 }
