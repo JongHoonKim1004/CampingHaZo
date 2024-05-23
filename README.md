@@ -173,5 +173,18 @@
   ![공지사항](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/4af391cf-7f8a-45da-b333-36e097072cf6)
 
 
-  
+ * **예약 목록**
+  * 관리자 페이지에서 `예약 목록`을 클릭하면 현재 등록된 예약 목록을 확인할 수 있다
+  * `예약 번호`를 클릭하면 해당 예약을 자세히 볼 수 있다
+
+  ![예약목록(관리자)](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/e28d881d-17b9-4d8d-b0ac-a5130393097c)
+
+ * **1:1 문의**
+  * 관리자 게시판에서 `1:1 문의`를 클릭하면 1:1 문의 목록을 호출한다
+  * 문의 제목을 클릭하면 문의 내용과 페이지 최하단에 답글을 확인할 수 있다
+  * 화면 중단의 답글 작성란에 답글을 작성할 수 있다
+
+
+  ![1대1문의 답변](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/43df2025-be13-446e-aef0-8797aa14f991)
+
 </details>
