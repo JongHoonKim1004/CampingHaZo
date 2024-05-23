@@ -24,5 +24,6 @@
 
 ## 🙋‍♀️ 팀원 소개
 - KIM JONGHOON <a href="https://github.com/JongHoonKim1004"><img src="https://img.shields.io/badge/GitHub-181717?style=plastic&logo=GitHub&logoColor=white"></a>
+- LEE DONGHEE <a href="https://github.com/ehdgml123"><img src="https://img.shields.io/badge/GitHub-181717?style=plastic&logo=GitHub&logoColor=white"></a>
 
 ## 🔧 기술 스택
