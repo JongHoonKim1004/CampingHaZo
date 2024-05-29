@@ -1,4 +1,9 @@
-<h1 align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCZTZTvB-vLnxLnd_LZ8NoVuahm4Jbus2v36SAs0IPDQ&s" style="width=300; height: 300"></h1>
+<h1 align="center">
+
+![main](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/e80ed691-5515-436b-829c-7ab394e7afd8)
+
+ 
+</h1>
 <h1 align="center">스프링 레거시 캠핑장 예약 프로젝트 - 5G캠핑</h1>
 <br/><br/>
 
