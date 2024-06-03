@@ -41,7 +41,7 @@
 - ETC : `Git`
 
  ## 👾 프로젝트 설계, 구현 📂 PPT 📂 (ERD, USECASE)
- <details><summary>프로젝트 설계, 구현, PPT</summary>
+ 프로젝트 설계, 구현, PPT
   
  <div align="center">
 
@@ -78,7 +78,7 @@
   | ![57](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/9277bafc-aaa9-4edf-8ad3-65ec712d934f) | |
 
  </div>
-</details>
+
 
  ## 💻 핵심 기능
 
@@ -108,8 +108,7 @@
 
 
 ## 🎇 주요기능 실행화면
-<details>
- <summary>주요기능 실행장면</summary>
+주요기능 실행장면
 
 * **메인 페이지**
   
@@ -192,7 +191,7 @@
 
   ![1대1문의 답변](https://github.com/JongHoonKim1004/CampingHaZo/assets/155927559/43df2025-be13-446e-aef0-8797aa14f991)
 
-</details>
+
 
 
 ## 🌄 개선사항
